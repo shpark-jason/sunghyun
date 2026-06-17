@@ -598,6 +598,194 @@ h3 {
   font-size: 0.76rem;
 }
 
+/* Template-style override: compact portfolio layout with teal blocks and smaller type. */
+.template-hero {
+  grid-template-columns: minmax(0, 0.88fr) minmax(320px, 0.72fr);
+  min-height: 620px;
+  gap: 56px;
+  padding-top: 72px;
+}
+
+.template-hero .hero-copy {
+  position: relative;
+}
+
+.template-hero .hero-copy::before {
+  position: absolute;
+  top: -34px;
+  left: -34px;
+  width: 74px;
+  height: 74px;
+  border-top: 10px solid var(--yellow);
+  border-left: 10px solid var(--yellow);
+  content: "";
+}
+
+.template-hero h1 {
+  max-width: 480px;
+  font-size: clamp(2.35rem, 4.2vw, 3.65rem);
+}
+
+.template-hero .lead {
+  max-width: 470px;
+  font-size: 0.86rem;
+}
+
+.template-hero .hero-panel {
+  display: block;
+  padding: 0;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+}
+
+.template-hero .panel-topline {
+  height: 310px;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+.hero-note {
+  width: min(86%, 320px);
+  margin: -58px 0 0 -36px;
+  border-radius: 4px;
+  background: var(--navy);
+  color: white;
+  padding: 22px;
+  box-shadow: 0 18px 36px rgba(17, 32, 68, 0.18);
+}
+
+.hero-note .panel-label {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.hero-note h2 {
+  color: white;
+  font-size: 1.08rem;
+}
+
+.hero-note p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.template-hero .quick-facts {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 34px;
+  border-radius: 4px;
+  background: white;
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.template-hero .quick-facts div {
+  border-top: 0;
+  border-right: 1px solid var(--line);
+  padding: 0 14px;
+}
+
+.template-hero .quick-facts div:last-child {
+  border-right: 0;
+}
+
+.template-hero .quick-facts dd {
+  font-size: 0.72rem;
+}
+
+.template-section,
+.template-split {
+  padding-block: 78px;
+}
+
+.template-section .section-heading,
+.template-split > div:first-child {
+  text-align: left;
+}
+
+.template-section .section-heading {
+  margin-left: 0;
+}
+
+.template-section .section-link {
+  margin-left: 0;
+}
+
+.agenda-grid {
+  align-items: stretch;
+}
+
+.agenda-card,
+.timeline-item,
+.publication-card,
+.media-card,
+.skill-column {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.agenda-card:hover,
+.timeline-item:hover,
+.publication-card:hover,
+.media-card:hover,
+.skill-column:hover {
+  border-color: rgba(0, 167, 165, 0.35);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.publication-card,
+.media-card {
+  min-height: 124px;
+}
+
+.split-section.template-split {
+  position: relative;
+}
+
+.split-section.template-split::before {
+  position: absolute;
+  top: 72px;
+  left: calc((100vw - min(var(--max), calc(100vw - 40px))) / -2);
+  z-index: -1;
+  width: 34vw;
+  height: 210px;
+  background: var(--teal);
+  content: "";
+  opacity: 0.1;
+}
+
+.methods-section .section-heading {
+  text-align: center;
+  margin-inline: auto;
+}
+
+@media (max-width: 960px) {
+  .template-hero {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .hero-note {
+    margin-left: 18px;
+  }
+
+  .template-hero .quick-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .template-hero .quick-facts div {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
+  }
+
+  .template-hero .quick-facts div:last-child {
+    border-bottom: 0;
+  }
+}
+
 .footer div {
   display: flex;
   flex-wrap: wrap;
