@@ -1,132 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunghyun Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="홈으로 이동">
-      <span class="brand-mark">S</span>
-      <span>Sunghyun</span>
-    </a>
-    <nav class="site-nav" aria-label="주요 메뉴">
-      <a href="#about">소개</a>
-      <a href="#work">프로젝트</a>
-      <a href="#skills">역량</a>
-      <a href="#contact">연락</a>
-    </nav>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sunghyun Portfolio</title>
+    <meta
+      name="description"
+      content="문제를 구조화하고, 사용자 경험으로 완성하는 Sunghyun의 포트폴리오입니다."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="홈으로 이동">SH</a>
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Personal Portfolio</p>
-        <h1>문제를 명료하게 정리하고, 신뢰감 있는 결과로 완성합니다.</h1>
-        <p class="hero-text">
-          사용자 경험, 정보 구조, 시각적 완성도를 함께 고려해
-          깔끔하고 전문적인 디지털 결과물을 만드는 포트폴리오입니다.
-        </p>
-        <div class="hero-actions">
-          <a class="button primary" href="#work">프로젝트 보기</a>
-          <a class="button secondary" href="#contact">문의하기</a>
-        </div>
-      </div>
-
-      <aside class="profile-panel" aria-label="프로필 요약">
-        <div class="portrait" aria-hidden="true"></div>
-        <div>
-          <p class="profile-name">Park Sunghyun</p>
-          <p class="profile-role">Portfolio / Web / Digital Work</p>
-        </div>
-        <dl class="profile-stats">
-          <div>
-            <dt>Focus</dt>
-            <dd>Web, UX, Detail</dd>
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-copy">
+          <p class="eyebrow">Portfolio 2026</p>
+          <h1>Sunghyun</h1>
+          <p class="lead">
+            복잡한 문제를 명료한 제품 경험으로 바꾸는 사람. 리서치, 설계,
+            구현을 연결해 실제로 쓰이는 결과물을 만듭니다.
+          </p>
+          <div class="hero-actions" aria-label="주요 행동">
+            <a class="button primary" href="#work">프로젝트 보기</a>
+            <a class="button secondary" href="mailto:hello@example.com">메일 보내기</a>
           </div>
-          <div>
-            <dt>Location</dt>
-            <dd>Seoul, Korea</dd>
-          </div>
-          <div>
-            <dt>Status</dt>
-            <dd>Open to Work</dd>
-          </div>
-        </dl>
-      </aside>
-    </section>
+        </div>
+        <figure class="hero-visual" aria-label="작업 공간 이미지">
+          <img src="assets/hero-workspace.svg" alt="" />
+        </figure>
+      </section>
 
-    <section id="about" class="section intro-section">
-      <div class="section-heading">
-        <p class="eyebrow">About</p>
-        <h2>좋은 화면은 필요한 정보를 조용하고 정확하게 전달한다고 믿습니다.</h2>
-      </div>
-      <p class="section-body">
-        프로젝트의 목적을 먼저 이해하고, 사용자가 자연스럽게 읽고 행동할 수 있는 구조를 설계합니다.
-        과한 장식보다 선명한 위계, 안정적인 여백, 일관된 톤으로 오래 보아도 피로하지 않은 경험을 지향합니다.
-      </p>
-    </section>
-
-    <section id="work" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Selected Work</p>
-        <h2>대표 프로젝트</h2>
-      </div>
-      <div class="work-grid">
-        <article class="work-card">
-          <p class="work-year">2026</p>
-          <h3>브랜드 웹사이트 리뉴얼</h3>
-          <p>브랜드 신뢰도를 높이기 위한 정보 구조 재설계와 반응형 웹 화면 제작.</p>
-          <span>Web Design</span>
-        </article>
-        <article class="work-card">
-          <p class="work-year">2025</p>
-          <h3>서비스 소개 페이지</h3>
-          <p>핵심 메시지가 빠르게 읽히도록 섹션 흐름과 행동 버튼을 정리한 랜딩페이지.</p>
-          <span>Landing Page</span>
-        </article>
-        <article class="work-card">
-          <p class="work-year">2025</p>
-          <h3>업무 관리 대시보드</h3>
-          <p>반복 업무와 주요 지표를 한눈에 파악할 수 있도록 설계한 운영 화면.</p>
-          <span>Dashboard</span>
-        </article>
-      </div>
-    </section>
-
-    <section id="skills" class="section skills-section">
-      <div class="section-heading">
-        <p class="eyebrow">Capabilities</p>
-        <h2>핵심 역량</h2>
-      </div>
-      <div class="skill-list">
+      <section class="metrics" aria-label="요약 지표">
         <div>
-          <h3>Strategy</h3>
-          <p>목표 정의, 사용자 흐름, 콘텐츠 구조 설계</p>
+          <strong>12+</strong>
+          <span>Launched Projects</span>
         </div>
         <div>
-          <h3>Design</h3>
-          <p>깔끔한 UI, 반응형 레이아웃, 브랜드 톤 정리</p>
+          <strong>5 yrs</strong>
+          <span>Product Experience</span>
         </div>
         <div>
-          <h3>Build</h3>
-          <p>HTML, CSS, JavaScript 기반 웹 페이지 구현</p>
+          <strong>3</strong>
+          <span>Core Domains</span>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="contact" class="section contact-section">
+      <section class="section" id="work">
+        <div class="section-heading">
+          <p class="eyebrow">Selected Work</p>
+          <h2>최근 작업</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-meta">
+              <span>Product Design</span>
+              <span>2026</span>
+            </div>
+            <h3>Insight Dashboard</h3>
+            <p>
+              분산된 데이터를 한 화면에서 탐색하도록 정보 구조와 필터 경험을
+              재설계했습니다.
+            </p>
+            <a href="#" aria-label="Insight Dashboard 자세히 보기">View case</a>
+          </article>
+          <article class="project-card">
+            <div class="project-meta">
+              <span>Frontend</span>
+              <span>2025</span>
+            </div>
+            <h3>Workflow Builder</h3>
+            <p>
+              반복 업무를 시각적으로 조합하는 편집기를 만들고, 저장/검증 흐름을
+              안정화했습니다.
+            </p>
+            <a href="#" aria-label="Workflow Builder 자세히 보기">View case</a>
+          </article>
+          <article class="project-card">
+            <div class="project-meta">
+              <span>Research</span>
+              <span>2025</span>
+            </div>
+            <h3>Customer Portal</h3>
+            <p>
+              고객 문의 여정을 분석해 셀프서비스 진입률을 높이는 포털 구조를
+              설계했습니다.
+            </p>
+            <a href="#" aria-label="Customer Portal 자세히 보기">View case</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="split-section" id="about">
+        <div>
+          <p class="eyebrow">About</p>
+          <h2>아이디어가 제품이 되는 과정을 좋아합니다.</h2>
+        </div>
+        <div class="about-copy">
+          <p>
+            저는 문제 정의부터 인터페이스 설계, 프론트엔드 구현, 출시 이후
+            개선까지 이어지는 전 과정을 다룹니다. 빠르게 만드는 것보다
+            사용자가 다시 돌아오는 흐름을 만드는 데 집중합니다.
+          </p>
+          <ul class="skill-list">
+            <li>Product Strategy</li>
+            <li>UX Research</li>
+            <li>Interface Design</li>
+            <li>Frontend Development</li>
+            <li>Design Systems</li>
+            <li>Data Visualization</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="contact-band" id="contact">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>같이 만들고 싶은 일이 있다면 편하게 연락주세요.</h2>
+        </div>
+        <div class="contact-actions">
+          <a class="button primary" href="mailto:hello@example.com">hello@example.com</a>
+          <button class="button secondary" type="button" data-copy="hello@example.com">
+            이메일 복사
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 Sunghyun</span>
       <div>
-        <p class="eyebrow">Contact</p>
-        <h2>함께 만들 프로젝트가 있다면 편하게 연락주세요.</h2>
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+        <a href="#">Resume</a>
       </div>
-      <a class="contact-link" href="mailto:hello@example.com">hello@example.com</a>
-    </section>
-  </main>
-</body>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>
