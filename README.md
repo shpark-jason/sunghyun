@@ -1,28 +1,25 @@
-# Personal Portfolio
+# Sunghyun Portfolio
 
-GitHub Pages로 배포할 수 있는 개인 포트폴리오 홈페이지입니다.
+GitHub Pages로 배포할 수 있는 정적 포트폴리오 웹사이트입니다.
 
 ## Files
 
-- `index.html`: 홈페이지 화면 구조
-- `style.css`: 디자인과 반응형 스타일
+- `index.html`: 페이지 구조
+- `styles.css`: 디자인과 반응형 스타일
+- `script.js`: 메뉴 활성화와 이메일 복사 기능
+- `assets/hero-workspace.svg`: 첫 화면 비주얼 자산
+- `.nojekyll`: GitHub Pages 정적 파일 배포 설정
 
-## GitHub Pages 설정
+## GitHub Pages
 
-1. GitHub에서 새 repository를 만듭니다.
-2. 이 폴더 안의 `index.html`, `style.css`, `README.md` 파일을 repository 최상단에 업로드합니다.
-3. Repository의 `Settings` > `Pages`로 이동합니다.
-4. `Build and deployment`에서 `Deploy from a branch`를 선택합니다.
-5. Branch는 `main`, folder는 `/root`로 선택합니다.
-6. 저장 후 몇 분 뒤 아래 형식의 주소에서 확인합니다.
+Repository `Settings` > `Pages`에서 다음처럼 설정합니다.
+
+- Source: `Deploy from a branch`
+- Branch: `main`
+- Folder: `/root`
+
+커스텀 도메인을 연결하려면 루트에 `CNAME` 파일을 추가하고, 파일 내용에 도메인만 적습니다.
 
 ```text
-https://YOUR_GITHUB_ID.github.io/REPOSITORY_NAME/
+example.com
 ```
-
-## 수정할 곳
-
-- 이름: `index.html`의 `홍길동`
-- 직무: `Designer / Developer / Planner`
-- 이메일: `hello@example.com`
-- 프로젝트: `대표 프로젝트` 섹션의 카드 3개
