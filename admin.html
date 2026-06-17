@@ -8,76 +8,106 @@
     <link rel="stylesheet" href="styles.css?v=20260617-wave" />
   </head>
   <body>
+    <div class="admin-lock" id="admin-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+      <form class="admin-lock-card" id="lock-form">
+        <p class="eyebrow">Protected</p>
+        <h1 id="lock-title">Admin Access</h1>
+        <p class="lock-help">Enter the password to edit this portfolio.</p>
+        <label>
+          Password
+          <input id="admin-password" type="password" inputmode="numeric" autocomplete="current-password" />
+        </label>
+        <button class="button primary" type="submit">Enter</button>
+        <p class="lock-error" id="lock-error" aria-live="polite"></p>
+      </form>
+    </div>
+
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Back to site">
         <span class="brand-mark">SP</span>
         <span>Portfolio Admin</span>
       </a>
-      <nav class="nav" aria-label="Admin navigation">
-        <a href="index.html">Site</a>
-        <a href="content.json">Content JSON</a>
-      </nav>
+      <div class="header-tools">
+        <nav class="nav" aria-label="Admin navigation">
+          <a href="index.html">Site</a>
+          <a href="details.html">Details</a>
+          <a href="content.json">Content</a>
+        </nav>
+      </div>
     </header>
 
     <main class="admin-shell">
       <section class="admin-header">
         <p class="eyebrow">Content Manager</p>
-        <h1>Update the portfolio content</h1>
+        <h1>Update the portfolio</h1>
         <p class="lead">
-          Edit the profile fields or the full JSON. On GitHub Pages, this page can preview and download changes locally.
-          To publish them, upload the downloaded <strong>content.json</strong> to the repository root.
+          Edit content with forms, preview locally, then download <strong>content.json</strong> and upload it to GitHub.
         </p>
       </section>
 
       <section class="notice">
-        This is a static GitHub Pages-friendly admin page. It does not store changes on GitHub by itself because that would require authenticated repository write access.
+        Image fields accept a URL or a site-relative path such as <strong>assets/photo.jpg</strong>. For GitHub Pages, upload the image file to the same path in the repository.
       </section>
 
-      <section class="admin-grid">
-        <form class="admin-card" id="quick-form">
-          <h2>Quick Edit</h2>
+      <section class="cms-layout">
+        <aside class="admin-card cms-sidebar">
           <label>
-            Locale
-            <select name="locale">
-              <option value="en">English</option>
-              <option value="ko">Korean</option>
+            Section
+            <select id="section-select">
+              <option value="profile">Profile</option>
+              <option value="researchInterests">Research Interests</option>
+              <option value="education">Education History</option>
+              <option value="work">Work History</option>
+              <option value="publications">Publications</option>
+              <option value="presentations">Presentations</option>
+              <option value="media">Columns & Media</option>
+              <option value="skills">Methods & Skills</option>
             </select>
           </label>
-          <label>
-            Name
-            <input name="name" autocomplete="name" />
-          </label>
-          <label>
-            Status
-            <input name="status" />
-          </label>
-          <label>
-            Email
-            <input name="email" autocomplete="email" />
-          </label>
-          <label>
-            Profile
-            <textarea name="profile"></textarea>
-          </label>
+          <div class="cms-list" id="item-list"></div>
           <div class="admin-actions">
-            <button class="button primary" type="submit">Apply to JSON</button>
-            <button class="button secondary" type="button" id="clear-draft">Clear Draft</button>
+            <button class="button primary" type="button" id="add-item">Add Item</button>
+            <button class="button secondary danger" type="button" id="delete-item">Delete Item</button>
           </div>
-        </form>
+        </aside>
 
-        <section class="admin-card">
-          <h2>Full JSON</h2>
-          <label>
-            Content
-            <textarea id="json-editor" spellcheck="false"></textarea>
-          </label>
-          <div class="admin-actions">
-            <button class="button primary" type="button" id="save-preview">Preview Locally</button>
-            <button class="button secondary" type="button" id="download-json">Download content.json</button>
+        <section class="admin-card cms-editor">
+          <div class="cms-editor-header">
+            <div>
+              <p class="eyebrow" id="editor-eyebrow">Profile</p>
+              <h2 id="editor-title">Edit content</h2>
+            </div>
+            <div class="admin-actions">
+              <button class="button secondary" type="button" id="change-password">Change Password</button>
+              <button class="button primary" type="button" id="save-preview">Preview Locally</button>
+              <button class="button secondary" type="button" id="download-json">Download JSON</button>
+            </div>
           </div>
+          <form class="field-grid" id="cms-form"></form>
         </section>
       </section>
     </main>
+
+    <div class="admin-lock" id="password-modal" hidden role="dialog" aria-modal="true" aria-labelledby="password-title">
+      <form class="admin-lock-card" id="password-form">
+        <p class="eyebrow">Security</p>
+        <h1 id="password-title">Change Password</h1>
+        <p class="lock-help">Use a 4-digit numeric password.</p>
+        <label>
+          Current password
+          <input id="current-password" type="password" inputmode="numeric" maxlength="4" />
+        </label>
+        <label>
+          New password
+          <input id="new-password" type="password" inputmode="numeric" maxlength="4" />
+        </label>
+        <div class="admin-actions">
+          <button class="button primary" type="submit">Save</button>
+          <button class="button secondary" type="button" id="cancel-password">Cancel</button>
+        </div>
+        <p class="lock-error" id="password-error" aria-live="polite"></p>
+      </form>
+    </div>
 
     <script src="admin.js?v=20260617-wave"></script>
   </body>
