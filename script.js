@@ -170,6 +170,11 @@ function renderSite(locale = activeLocale) {
     emailActionLink.href = `mailto:${data.email}`;
   }
 
+  const portrait = document.querySelector("#portrait-image");
+  if (portrait && data.portrait) {
+    portrait.src = data.portrait;
+  }
+
   const footerName = document.querySelector("#footer-name");
   if (footerName) footerName.textContent = `© 2026 ${data.name}`;
 
