@@ -66,12 +66,24 @@ function renderPublicationCards(items) {
   return (items || [])
     .map((item) => {
       return `<article class="publication-card">
+        ${imageMarkup(item)}
         <span class="publication-type">${escapeHTML(item.type)}</span>
         <h3>${escapeHTML(item.title)}</h3>
         <p>${escapeHTML(item.citation)}</p>
+        ${descriptionMarkup(item)}
       </article>`;
     })
     .join("");
+}
+
+function imageMarkup(item) {
+  if (!item?.image) return "";
+  return `<figure class="detail-image"><img src="${escapeHTML(item.image)}" alt="" /></figure>`;
+}
+
+function descriptionMarkup(item) {
+  if (!item?.description) return "";
+  return `<p class="detail-description">${escapeHTML(item.description)}</p>`;
 }
 
 function pickItems(items, itemIndex) {
@@ -86,14 +98,14 @@ function renderDetailsCards(section, data) {
 
   if (section === "interests") {
     content.innerHTML = pickItems(data.researchInterests, itemIndex)
-      .map((item) => `<article class="agenda-card"><span class="card-index">·</span><h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(item.summary)}</p></article>`)
+      .map((item) => `<article class="agenda-card">${imageMarkup(item)}<span class="card-index">·</span><h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(item.summary)}</p>${descriptionMarkup(item)}</article>`)
       .join("");
     return;
   }
 
   if (section === "education") {
     content.innerHTML = pickItems(data.education, itemIndex)
-      .map((item) => `<article class="timeline-item"><h3>${escapeHTML(item.degree)}</h3><p class="timeline-meta">${escapeHTML(item.institution)} · ${escapeHTML(item.location)}</p><p>${escapeHTML(item.detail)}</p></article>`)
+      .map((item) => `<article class="timeline-item">${imageMarkup(item)}<h3>${escapeHTML(item.degree)}</h3><p class="timeline-meta">${escapeHTML(item.institution)} · ${escapeHTML(item.location)}</p><p>${escapeHTML(item.detail)}</p>${descriptionMarkup(item)}</article>`)
       .join("");
     return;
   }
@@ -112,7 +124,7 @@ function renderDetailsCards(section, data) {
     content.innerHTML = pickItems(data.media, itemIndex)
       .map((item) => {
         const title = item.href ? `<a href="${escapeHTML(item.href)}">${escapeHTML(item.title)}</a>` : escapeHTML(item.title);
-        return `<article class="media-card"><span class="media-type">${escapeHTML(item.type)}</span><h3>${title}</h3><p>${escapeHTML(item.summary)}</p></article>`;
+        return `<article class="media-card">${imageMarkup(item)}<span class="media-type">${escapeHTML(item.type)}</span><h3>${title}</h3><p>${escapeHTML(item.summary)}</p>${descriptionMarkup(item)}</article>`;
       })
       .join("");
     return;
@@ -122,7 +134,7 @@ function renderDetailsCards(section, data) {
     content.innerHTML = pickItems(data.work, itemIndex)
       .map((item) => {
         const bullets = (item.bullets || []).map((bullet) => `<li>${escapeHTML(bullet)}</li>`).join("");
-        return `<article class="timeline-item"><h3>${escapeHTML(item.role)}</h3><p class="timeline-meta">${escapeHTML(item.organization)} · ${escapeHTML(item.period)}</p><ul>${bullets}</ul></article>`;
+        return `<article class="timeline-item">${imageMarkup(item)}<h3>${escapeHTML(item.role)}</h3><p class="timeline-meta">${escapeHTML(item.organization)} · ${escapeHTML(item.period)}</p><ul>${bullets}</ul>${descriptionMarkup(item)}</article>`;
       })
       .join("");
     return;
