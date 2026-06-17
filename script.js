@@ -19,54 +19,72 @@ sections.forEach((section) => observer.observe(section));
 
 const uiText = {
   en: {
-    navAgenda: "Agenda",
+    navInterests: "Interests",
     navEducation: "Education",
     navPublications: "Publications",
+    navPresentations: "Presentations",
+    navWork: "Work",
     navMedia: "Media",
-    navExperience: "Experience",
-    heroPrimary: "Research Agenda",
+    heroPrimary: "Research Interests",
     heroSecondary: "Download CV",
     currentFocus: "Current Focus",
-    agendaEyebrow: "Research Agenda",
-    agendaTitle: "How infrastructures shape participation",
-    educationEyebrow: "Education",
+    interestsEyebrow: "Research Interests",
+    interestsTitle: "Questions that guide my doctoral work",
+    educationEyebrow: "Education History",
     educationTitle: "Training across media, culture, and communication",
-    publicationsEyebrow: "Publications & Presentations",
-    publicationsTitle: "Selected scholarly work",
+    publicationsEyebrow: "Publications",
+    publicationsTitle: "Peer-reviewed scholarly work",
+    presentationsEyebrow: "Presentations",
+    presentationsTitle: "Conference activity",
     mediaEyebrow: "Columns & Media",
     mediaTitle: "Public-facing writing and commentary",
-    experienceEyebrow: "Experience",
-    experienceTitle: "Research, policy, and cultural work",
+    workEyebrow: "Work History",
+    workTitle: "Research, policy, and cultural work",
     methodsEyebrow: "Methods & Skills",
     methodsTitle: "Research toolkit",
     contactEyebrow: "Contact",
     contactTitle: "Open to doctoral research conversations and academic collaboration.",
     adminLink: "Admin",
+    viewResearch: "View research details",
+    viewEducation: "View education details",
+    viewPublications: "View all publications",
+    viewPresentations: "View all presentations",
+    viewMedia: "View media activity",
+    viewWork: "View work details",
   },
   ko: {
-    navAgenda: "연구 의제",
+    navInterests: "연구 관심사",
     navEducation: "학력",
-    navPublications: "연구 성과",
+    navPublications: "논문",
+    navPresentations: "발표",
+    navWork: "경력",
     navMedia: "언론 활동",
-    navExperience: "경력",
-    heroPrimary: "연구 의제 보기",
+    heroPrimary: "연구 관심사 보기",
     heroSecondary: "CV 다운로드",
     currentFocus: "현재 연구 초점",
-    agendaEyebrow: "연구 의제",
-    agendaTitle: "디지털 인프라는 참여를 어떻게 구조화하는가",
+    interestsEyebrow: "연구 관심사",
+    interestsTitle: "박사과정 연구를 이끄는 질문들",
     educationEyebrow: "학력",
     educationTitle: "미디어, 문화, 커뮤니케이션을 가로지르는 연구 훈련",
-    publicationsEyebrow: "논문 및 학술 발표",
-    publicationsTitle: "주요 연구 성과",
+    publicationsEyebrow: "논문",
+    publicationsTitle: "동료심사 학술 성과",
+    presentationsEyebrow: "발표",
+    presentationsTitle: "학술대회 발표 활동",
     mediaEyebrow: "칼럼 및 언론 활동",
     mediaTitle: "공론장 글쓰기와 미디어 코멘터리",
-    experienceEyebrow: "경력",
-    experienceTitle: "연구, 정책, 문화 현장의 경험",
+    workEyebrow: "경력",
+    workTitle: "연구, 정책, 문화 현장의 경험",
     methodsEyebrow: "방법론 및 역량",
     methodsTitle: "연구 도구",
     contactEyebrow: "연락처",
     contactTitle: "박사과정 연구 논의와 학술 협업에 열려 있습니다.",
     adminLink: "관리",
+    viewResearch: "연구 상세 보기",
+    viewEducation: "학력 상세 보기",
+    viewPublications: "논문 전체 보기",
+    viewPresentations: "발표 전체 보기",
+    viewMedia: "언론 활동 보기",
+    viewWork: "경력 상세 보기",
   },
 };
 
@@ -81,11 +99,12 @@ const fallbackContent = {
         "Scholar investigating how digital platforms shape participation, inequality, and user agency in contemporary mediated environments.",
       interests: ["Platform Power", "User Agency", "Digital Inequality"],
       facts: [],
-      agenda: [],
+      researchInterests: [],
       education: [],
       publications: [],
+      presentations: [],
       media: [],
-      experience: [],
+      work: [],
       skills: [],
       links: [],
     },
@@ -155,12 +174,12 @@ function renderSite(locale = activeLocale) {
     return `<div><dt>${escapeHTML(item.label)}</dt><dd>${escapeHTML(item.value)}</dd></div>`;
   });
 
-  if (data.agenda?.[0]) {
-    document.querySelector("#focus-title").textContent = data.agenda[0].title;
-    document.querySelector("#focus-summary").textContent = data.agenda[0].summary;
+  if (data.researchInterests?.[0]) {
+    document.querySelector("#focus-title").textContent = data.researchInterests[0].title;
+    document.querySelector("#focus-summary").textContent = data.researchInterests[0].summary;
   }
 
-  renderList(document.querySelector("#agenda-grid"), data.agenda, (item, index) => {
+  renderList(document.querySelector("#interests-grid"), data.researchInterests, (item, index) => {
     return `<article class="agenda-card">
       <span class="card-index">0${index + 1}</span>
       <div>
@@ -170,7 +189,7 @@ function renderSite(locale = activeLocale) {
     </article>`;
   });
 
-  renderList(document.querySelector("#education-list"), data.education, (item) => {
+  renderList(document.querySelector("#education-list"), (data.education || []).slice(0, 2), (item) => {
     return `<article class="timeline-item">
       <div>
         <h3>${escapeHTML(item.degree)}</h3>
@@ -180,7 +199,7 @@ function renderSite(locale = activeLocale) {
     </article>`;
   });
 
-  renderList(document.querySelector("#publication-list"), data.publications, (item) => {
+  renderList(document.querySelector("#publication-list"), (data.publications || []).slice(0, 2), (item) => {
     return `<article class="publication-card">
       <span class="publication-type">${escapeHTML(item.type)}</span>
       <h3>${escapeHTML(item.title)}</h3>
@@ -188,7 +207,17 @@ function renderSite(locale = activeLocale) {
     </article>`;
   });
 
-  renderList(document.querySelector("#media-list"), data.media, (item) => {
+  renderList(document.querySelector("#presentation-list"), (data.presentations || []).slice(0, 2), (item) => {
+    return `<article class="publication-card">
+      <span class="publication-type">${escapeHTML(item.type)}</span>
+      <div>
+        <h3>${escapeHTML(item.title)}</h3>
+        <p>${escapeHTML(item.citation)}</p>
+      </div>
+    </article>`;
+  });
+
+  renderList(document.querySelector("#media-list"), (data.media || []).slice(0, 2), (item) => {
     const href = item.href ? ` href="${escapeHTML(item.href)}"` : "";
     return `<article class="media-card">
       <span class="media-type">${escapeHTML(item.type)}</span>
@@ -197,9 +226,9 @@ function renderSite(locale = activeLocale) {
     </article>`;
   });
 
-  renderList(document.querySelector("#experience-list"), data.experience, (item) => {
+  renderList(document.querySelector("#work-list"), (data.work || data.experience || []).slice(0, 3), (item) => {
     const bullets = (item.bullets || []).map((bullet) => `<li>${escapeHTML(bullet)}</li>`).join("");
-    return `<article class="timeline-item">
+    return `<article class="timeline-item compact">
       <div>
         <h3>${escapeHTML(item.role)}</h3>
         <p class="timeline-meta">${escapeHTML(item.organization)} · ${escapeHTML(item.period)}</p>
