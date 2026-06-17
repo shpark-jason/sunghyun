@@ -859,6 +859,35 @@ h3 {
   line-height: 1.55;
 }
 
+.order-list {
+  display: grid;
+  gap: 8px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: white;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 11px 12px;
+  cursor: grab;
+}
+
+.order-item.dragging {
+  opacity: 0.55;
+}
+
+.drag-handle {
+  color: var(--teal);
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .image-preview {
   display: block;
   width: 100%;
