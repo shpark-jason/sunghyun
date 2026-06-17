@@ -21,8 +21,10 @@
           <a href="#interests" data-i18n="navInterests">Interests</a>
           <a href="#education" data-i18n="navEducation">Education</a>
           <a href="#work" data-i18n="navWork">Work</a>
+          <a href="#memberships" data-i18n="navMemberships">Memberships</a>
           <a href="#publications" data-i18n="navPublications">Publications</a>
           <a href="#presentations" data-i18n="navPresentations">Presentations</a>
+          <a href="#projects" data-i18n="navProjects">Projects</a>
           <a href="#media" data-i18n="navMedia">Media</a>
         </nav>
         <div class="language-toggle" aria-label="Language">
@@ -54,7 +56,8 @@
       </section>
       <div class="hero-wave" aria-hidden="true"></div>
 
-      <section class="section template-section" id="interests">
+      <div class="home-sections" id="home-sections">
+      <section class="section template-section" id="interests" data-section-key="interests">
         <div class="section-heading">
           <p class="eyebrow" data-i18n="interestsEyebrow">Research Interests</p>
           <h2 data-i18n="interestsTitle">Current research interests</h2>
@@ -63,7 +66,7 @@
         <div class="agenda-grid" id="interests-grid"></div>
       </section>
 
-      <section class="split-section template-split" id="education">
+      <section class="split-section template-split" id="education" data-section-key="education">
         <div>
           <p class="eyebrow" data-i18n="educationEyebrow">Education History</p>
           <h2 data-i18n="educationTitle">Training across media, culture, and communication</h2>
@@ -72,7 +75,7 @@
         <div class="timeline" id="education-list"></div>
       </section>
 
-      <section class="split-section experience-section template-split" id="work">
+      <section class="split-section experience-section template-split" id="work" data-section-key="work">
         <div>
           <p class="eyebrow" data-i18n="workEyebrow">Work History</p>
           <h2 data-i18n="workTitle">Research, policy, and cultural work</h2>
@@ -81,7 +84,16 @@
         <div class="timeline" id="work-list"></div>
       </section>
 
-      <section class="section template-section" id="publications">
+      <section class="section template-section" id="memberships" data-section-key="memberships">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="membershipsEyebrow">Memberships</p>
+          <h2 data-i18n="membershipsTitle">Academic and research affiliations</h2>
+          <a class="section-link" href="details.html?section=memberships" data-i18n="viewMemberships">View memberships</a>
+        </div>
+        <div class="publication-list" id="membership-list"></div>
+      </section>
+
+      <section class="section template-section" id="publications" data-section-key="publications">
         <div class="section-heading">
           <p class="eyebrow" data-i18n="publicationsEyebrow">Publications</p>
           <h2 data-i18n="publicationsTitle">Peer-reviewed scholarly work</h2>
@@ -90,7 +102,7 @@
         <div class="publication-list" id="publication-list"></div>
       </section>
 
-      <section class="section template-section" id="presentations">
+      <section class="section template-section" id="presentations" data-section-key="presentations">
         <div class="section-heading">
           <p class="eyebrow" data-i18n="presentationsEyebrow">Presentations</p>
           <h2 data-i18n="presentationsTitle">Conference activity</h2>
@@ -99,7 +111,16 @@
         <div class="publication-list" id="presentation-list"></div>
       </section>
 
-      <section class="section media-section template-section" id="media">
+      <section class="section template-section" id="projects" data-section-key="projects">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="projectsEyebrow">Projects</p>
+          <h2 data-i18n="projectsTitle">Research and public-facing projects</h2>
+          <a class="section-link" href="details.html?section=projects" data-i18n="viewProjects">View projects</a>
+        </div>
+        <div class="publication-list" id="project-list"></div>
+      </section>
+
+      <section class="section media-section template-section" id="media" data-section-key="media">
         <div class="section-heading">
           <p class="eyebrow" data-i18n="mediaEyebrow">Columns & Media</p>
           <h2 data-i18n="mediaTitle">Public-facing writing and commentary</h2>
@@ -108,13 +129,14 @@
         <div class="media-list" id="media-list"></div>
       </section>
 
-      <section class="section methods-section">
+      <section class="section methods-section" data-section-key="skills">
         <div class="section-heading">
           <p class="eyebrow" data-i18n="methodsEyebrow">Methods & Skills</p>
           <h2 data-i18n="methodsTitle">Research toolkit</h2>
         </div>
         <div class="skill-columns" id="skills-list"></div>
       </section>
+      </div>
 
       <section class="contact-band" id="contact">
         <div>
