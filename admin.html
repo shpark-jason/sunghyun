@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin | Sunghyun Park</title>
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Back to site">
+        <span class="brand-mark">SP</span>
+        <span>Portfolio Admin</span>
+      </a>
+      <nav class="nav" aria-label="Admin navigation">
+        <a href="index.html">Site</a>
+        <a href="content.json">Content JSON</a>
+      </nav>
+    </header>
+
+    <main class="admin-shell">
+      <section class="admin-header">
+        <p class="eyebrow">Content Manager</p>
+        <h1>Update the portfolio content</h1>
+        <p class="lead">
+          Edit the profile fields or the full JSON. On GitHub Pages, this page can preview and download changes locally.
+          To publish them, upload the downloaded <strong>content.json</strong> to the repository root.
+        </p>
+      </section>
+
+      <section class="notice">
+        This is a static GitHub Pages-friendly admin page. It does not store changes on GitHub by itself because that would require authenticated repository write access.
+      </section>
+
+      <section class="admin-grid">
+        <form class="admin-card" id="quick-form">
+          <h2>Quick Edit</h2>
+          <label>
+            Locale
+            <select name="locale">
+              <option value="en">English</option>
+              <option value="ko">Korean</option>
+            </select>
+          </label>
+          <label>
+            Name
+            <input name="name" autocomplete="name" />
+          </label>
+          <label>
+            Status
+            <input name="status" />
+          </label>
+          <label>
+            Email
+            <input name="email" autocomplete="email" />
+          </label>
+          <label>
+            Profile
+            <textarea name="profile"></textarea>
+          </label>
+          <div class="admin-actions">
+            <button class="button primary" type="submit">Apply to JSON</button>
+            <button class="button secondary" type="button" id="clear-draft">Clear Draft</button>
+          </div>
+        </form>
+
+        <section class="admin-card">
+          <h2>Full JSON</h2>
+          <label>
+            Content
+            <textarea id="json-editor" spellcheck="false"></textarea>
+          </label>
+          <div class="admin-actions">
+            <button class="button primary" type="button" id="save-preview">Preview Locally</button>
+            <button class="button secondary" type="button" id="download-json">Download content.json</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
