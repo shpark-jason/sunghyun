@@ -66,6 +66,20 @@ const sectionConfig = {
       ["description", "Detailed description", "textarea"],
     ],
   },
+  memberships: {
+    label: "Memberships",
+    create: () => ({ type: "Membership", title: "New membership", summary: "", href: "", description: "", image: "" }),
+    sharedFields: [
+      ["href", "External link", "text"],
+      ["image", "Detail image", "image"],
+    ],
+    fields: [
+      ["type", "Type", "text"],
+      ["title", "Title", "text"],
+      ["summary", "Short summary", "textarea"],
+      ["description", "Detailed description", "textarea"],
+    ],
+  },
   publications: {
     label: "Publications",
     create: () => ({ type: "Refereed Journal Article", title: "New publication", citation: "", href: "", description: "", image: "" }),
@@ -94,6 +108,20 @@ const sectionConfig = {
       ["description", "Detailed description", "textarea"],
     ],
   },
+  projects: {
+    label: "Projects",
+    create: () => ({ type: "Project", title: "New project", summary: "", href: "", description: "", image: "" }),
+    sharedFields: [
+      ["href", "External link", "text"],
+      ["image", "Detail image", "image"],
+    ],
+    fields: [
+      ["type", "Type", "text"],
+      ["title", "Title", "text"],
+      ["summary", "Short summary", "textarea"],
+      ["description", "Detailed description", "textarea"],
+    ],
+  },
   media: {
     label: "Columns & Media",
     create: () => ({ type: "Column", title: "New media activity", summary: "", href: "", description: "", image: "" }),
@@ -115,6 +143,10 @@ const sectionConfig = {
       ["category", "Category", "text"],
       ["items", "Items, one per line", "lines"],
     ],
+  },
+  sectionOrder: {
+    label: "Section Order",
+    fields: [["sectionOrder", "Home section order, one per line", "lines"]],
   },
 };
 
@@ -190,6 +222,7 @@ function collection(locale, section) {
 
 function currentItem(locale) {
   const section = sectionSelect.value;
+  if (section === "sectionOrder") return contentData;
   if (section === "profile") return localeData(locale);
   const items = collection(locale, section);
   if (items.length === 0) items.push(sectionConfig[section].create());
@@ -197,6 +230,7 @@ function currentItem(locale) {
 }
 
 function sharedItem() {
+  if (sectionSelect.value === "sectionOrder") return contentData;
   return currentItem("en");
 }
 
@@ -206,6 +240,7 @@ function itemLabel(item, section) {
   if (section === "education") return item.degree;
   if (section === "work") return item.role;
   if (section === "skills") return item.category;
+  if (section === "sectionOrder") return "Home section order";
   return item.title;
 }
 
@@ -231,12 +266,59 @@ function escapeHTML(value) {
     .replaceAll("'", "&#039;");
 }
 
+function sectionOrderLabel(key) {
+  const labels = {
+    interests: "Research Interests",
+    education: "Education History",
+    work: "Work History",
+    memberships: "Memberships",
+    publications: "Publications",
+    presentations: "Presentations",
+    projects: "Projects",
+    media: "Columns & Media",
+    skills: "Methods & Skills",
+  };
+  return labels[key] || key;
+}
+
+function setupOrderDrag() {
+  const list = document.querySelector("#order-list");
+  if (!list) return;
+  let dragged;
+
+  list.querySelectorAll(".order-item").forEach((item) => {
+    item.addEventListener("dragstart", () => {
+      dragged = item;
+      item.classList.add("dragging");
+    });
+
+    item.addEventListener("dragend", () => {
+      item.classList.remove("dragging");
+      dragged = null;
+      contentData.sectionOrder = Array.from(list.querySelectorAll(".order-item")).map((node) => node.dataset.key);
+    });
+
+    item.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      if (!dragged || dragged === item) return;
+      const rect = item.getBoundingClientRect();
+      const after = event.clientY > rect.top + rect.height / 2;
+      list.insertBefore(dragged, after ? item.nextSibling : item);
+    });
+  });
+}
+
 function renderItemList() {
   const section = sectionSelect.value;
   itemList.innerHTML = "";
 
   if (section === "profile") {
     itemList.innerHTML = `<button class="cms-list-item active" type="button">Main profile</button>`;
+    return;
+  }
+
+  if (section === "sectionOrder") {
+    itemList.innerHTML = `<button class="cms-list-item active" type="button">Home section order</button>`;
     return;
   }
 
@@ -282,6 +364,23 @@ function controlMarkup(locale, item, key, label, type) {
 function renderForm() {
   const section = sectionSelect.value;
   const config = sectionConfig[section];
+
+  if (section === "sectionOrder") {
+    editorEyebrow.textContent = config.label;
+    editorTitle.textContent = "Arrange homepage sections";
+    const defaultOrder = ["interests", "education", "work", "memberships", "publications", "presentations", "projects", "media", "skills"];
+    const savedOrder = contentData.sectionOrder || defaultOrder;
+    const order = [...savedOrder, ...defaultOrder.filter((key) => !savedOrder.includes(key))];
+    form.innerHTML = `<section class="locale-editor shared-editor">
+      <h3>Shared order</h3>
+      <p class="shared-note">Drag sections to reorder the homepage.</p>
+      <div class="order-list" id="order-list">
+        ${order.map((key) => `<div class="order-item" draggable="true" data-key="${escapeHTML(key)}"><span class="drag-handle">≡</span><span>${escapeHTML(sectionOrderLabel(key))}</span></div>`).join("")}
+      </div>
+    </section>`;
+    setupOrderDrag();
+    return;
+  }
 
   editorEyebrow.textContent = config.label;
   editorTitle.textContent = section === "profile" ? "Edit main profile" : itemLabel(currentItem("en"), section) || "Edit item";
@@ -350,6 +449,7 @@ sectionSelect.addEventListener("change", () => {
 document.querySelector("#add-item").addEventListener("click", () => {
   const section = sectionSelect.value;
   if (section === "profile") return;
+  if (section === "sectionOrder") return;
   locales.forEach(({ key }) => collection(key, section).push(sectionConfig[section].create()));
   selectedIndex = collection("en", section).length - 1;
   renderAdmin();
@@ -358,6 +458,7 @@ document.querySelector("#add-item").addEventListener("click", () => {
 document.querySelector("#delete-item").addEventListener("click", () => {
   const section = sectionSelect.value;
   if (section === "profile") return;
+  if (section === "sectionOrder") return;
   locales.forEach(({ key }) => {
     const items = collection(key, section);
     if (items.length > 0) items.splice(selectedIndex, 1);
