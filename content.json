@@ -30,7 +30,7 @@
           "value": "Seoul, Republic of Korea"
         }
       ],
-      "agenda": [
+      "researchInterests": [
         {
           "title": "Platform Affordances, User Agency, and Mediated Experience",
           "summary": "Examines how platform architectures structure participation, mobility, sensory engagement, and belonging in digitally mediated environments."
@@ -63,7 +63,9 @@
           "type": "Refereed Journal Article",
           "title": "K-Pop and Education Migration to Korea in the Digitalised COVID Era",
           "citation": "Park, S., Schutte, S., & Park, S. (2025). Social Sciences, 14(6), 390. https://doi.org/10.3390/socsci14060390"
-        },
+        }
+      ],
+      "presentations": [
         {
           "type": "Conference Presentation",
           "title": "A Study on the Discrimination of 'Rental' Apartments Reproduced in TV Dramas",
@@ -83,7 +85,7 @@
           "href": ""
         }
       ],
-      "experience": [
+      "work": [
         {
           "role": "Activist",
           "organization": "Center for Media Responsibility and Human Rights",
@@ -179,7 +181,7 @@
           "value": "대한민국 서울"
         }
       ],
-      "agenda": [
+      "researchInterests": [
         {
           "title": "플랫폼 어포던스, 사용자 행위성, 매개 경험",
           "summary": "플랫폼 아키텍처가 디지털 매개 환경에서 참여, 이동성, 감각적 관여, 소속감을 어떻게 구조화하는지 탐구합니다."
@@ -212,7 +214,9 @@
           "type": "학술지 논문",
           "title": "K-Pop and Education Migration to Korea in the Digitalised COVID Era",
           "citation": "Park, S., Schutte, S., & Park, S. (2025). Social Sciences, 14(6), 390. https://doi.org/10.3390/socsci14060390"
-        },
+        }
+      ],
+      "presentations": [
         {
           "type": "학술 발표",
           "title": "TV 드라마에 재현된 임대아파트 차별 연구",
@@ -232,7 +236,7 @@
           "href": ""
         }
       ],
-      "experience": [
+      "work": [
         {
           "role": "활동가",
           "organization": "미디어책임과인권센터",
