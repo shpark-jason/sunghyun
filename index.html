@@ -1,147 +1,124 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sunghyun Portfolio</title>
+    <title>Sunghyun Park | Research Portfolio</title>
     <meta
       name="description"
-      content="문제를 구조화하고, 사용자 경험으로 완성하는 Sunghyun의 포트폴리오입니다."
+      content="Research portfolio of Sunghyun Park, studying platform power, digital inequality, and user agency."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#home" aria-label="홈으로 이동">SH</a>
-      <nav class="nav" aria-label="주요 섹션">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <a class="brand" href="#home" aria-label="Home">
+        <span class="brand-mark">SP</span>
+        <span data-field="name">Sunghyun Park</span>
+      </a>
+      <div class="header-tools">
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#agenda" data-i18n="navAgenda">Agenda</a>
+          <a href="#education" data-i18n="navEducation">Education</a>
+          <a href="#publications" data-i18n="navPublications">Publications</a>
+          <a href="#media" data-i18n="navMedia">Media</a>
+          <a href="#experience" data-i18n="navExperience">Experience</a>
+        </nav>
+        <div class="language-toggle" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="ko" aria-pressed="false">KR</button>
+        </div>
+      </div>
     </header>
 
     <main>
       <section class="hero" id="home">
         <div class="hero-copy">
-          <p class="eyebrow">Portfolio 2026</p>
-          <h1>Sunghyun</h1>
-          <p class="lead">
-            복잡한 문제를 명료한 제품 경험으로 바꾸는 사람. 리서치, 설계,
-            구현을 연결해 실제로 쓰이는 결과물을 만듭니다.
+          <p class="eyebrow" data-field="status">PhD Applicant · Media & Platform Studies</p>
+          <h1 data-field="name">Sunghyun Park</h1>
+          <p class="lead" data-field="profile">
+            Scholar investigating how digital platforms shape participation, inequality, and user agency in contemporary mediated environments.
           </p>
-          <div class="hero-actions" aria-label="주요 행동">
-            <a class="button primary" href="#work">프로젝트 보기</a>
-            <a class="button secondary" href="mailto:hello@example.com">메일 보내기</a>
+          <div class="hero-tags" id="research-interests" aria-label="Research interests"></div>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#agenda" data-i18n="heroPrimary">Research Agenda</a>
+            <a class="button secondary" href="assets/sunghyun-park-cv.pdf" data-i18n="heroSecondary">Download CV</a>
           </div>
         </div>
-        <figure class="hero-visual" aria-label="작업 공간 이미지">
-          <img src="assets/hero-workspace.svg" alt="" />
-        </figure>
-      </section>
-
-      <section class="metrics" aria-label="요약 지표">
-        <div>
-          <strong>12+</strong>
-          <span>Launched Projects</span>
-        </div>
-        <div>
-          <strong>5 yrs</strong>
-          <span>Product Experience</span>
-        </div>
-        <div>
-          <strong>3</strong>
-          <span>Core Domains</span>
-        </div>
-      </section>
-
-      <section class="section" id="work">
-        <div class="section-heading">
-          <p class="eyebrow">Selected Work</p>
-          <h2>최근 작업</h2>
-        </div>
-        <div class="project-grid">
-          <article class="project-card">
-            <div class="project-meta">
-              <span>Product Design</span>
-              <span>2026</span>
-            </div>
-            <h3>Insight Dashboard</h3>
-            <p>
-              분산된 데이터를 한 화면에서 탐색하도록 정보 구조와 필터 경험을
-              재설계했습니다.
-            </p>
-            <a href="#" aria-label="Insight Dashboard 자세히 보기">View case</a>
-          </article>
-          <article class="project-card">
-            <div class="project-meta">
-              <span>Frontend</span>
-              <span>2025</span>
-            </div>
-            <h3>Workflow Builder</h3>
-            <p>
-              반복 업무를 시각적으로 조합하는 편집기를 만들고, 저장/검증 흐름을
-              안정화했습니다.
-            </p>
-            <a href="#" aria-label="Workflow Builder 자세히 보기">View case</a>
-          </article>
-          <article class="project-card">
-            <div class="project-meta">
-              <span>Research</span>
-              <span>2025</span>
-            </div>
-            <h3>Customer Portal</h3>
-            <p>
-              고객 문의 여정을 분석해 셀프서비스 진입률을 높이는 포털 구조를
-              설계했습니다.
-            </p>
-            <a href="#" aria-label="Customer Portal 자세히 보기">View case</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="split-section" id="about">
-        <div>
-          <p class="eyebrow">About</p>
-          <h2>아이디어가 제품이 되는 과정을 좋아합니다.</h2>
-        </div>
-        <div class="about-copy">
-          <p>
-            저는 문제 정의부터 인터페이스 설계, 프론트엔드 구현, 출시 이후
-            개선까지 이어지는 전 과정을 다룹니다. 빠르게 만드는 것보다
-            사용자가 다시 돌아오는 흐름을 만드는 데 집중합니다.
+        <aside class="hero-panel" aria-label="Profile summary">
+          <div class="panel-topline"></div>
+          <p class="panel-label" data-i18n="currentFocus">Current Focus</p>
+          <h2 id="focus-title">Platform Power and User Agency</h2>
+          <p id="focus-summary">
+            Examining how platform infrastructures organize cultural participation, belonging, mobility, and access.
           </p>
-          <ul class="skill-list">
-            <li>Product Strategy</li>
-            <li>UX Research</li>
-            <li>Interface Design</li>
-            <li>Frontend Development</li>
-            <li>Design Systems</li>
-            <li>Data Visualization</li>
-          </ul>
+          <dl class="quick-facts" id="quick-facts"></dl>
+        </aside>
+      </section>
+
+      <section class="section agenda-section" id="agenda">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="agendaEyebrow">Research Agenda</p>
+          <h2 data-i18n="agendaTitle">How infrastructures shape participation</h2>
         </div>
+        <div class="agenda-grid" id="agenda-grid"></div>
+      </section>
+
+      <section class="split-section" id="education">
+        <div>
+          <p class="eyebrow" data-i18n="educationEyebrow">Education</p>
+          <h2 data-i18n="educationTitle">Training across media, culture, and communication</h2>
+        </div>
+        <div class="timeline" id="education-list"></div>
+      </section>
+
+      <section class="section" id="publications">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="publicationsEyebrow">Publications & Presentations</p>
+          <h2 data-i18n="publicationsTitle">Selected scholarly work</h2>
+        </div>
+        <div class="publication-list" id="publication-list"></div>
+      </section>
+
+      <section class="section media-section" id="media">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="mediaEyebrow">Columns & Media</p>
+          <h2 data-i18n="mediaTitle">Public-facing writing and commentary</h2>
+        </div>
+        <div class="media-list" id="media-list"></div>
+      </section>
+
+      <section class="split-section experience-section" id="experience">
+        <div>
+          <p class="eyebrow" data-i18n="experienceEyebrow">Experience</p>
+          <h2 data-i18n="experienceTitle">Research, policy, and cultural work</h2>
+        </div>
+        <div class="timeline" id="experience-list"></div>
+      </section>
+
+      <section class="section methods-section">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="methodsEyebrow">Methods & Skills</p>
+          <h2 data-i18n="methodsTitle">Research toolkit</h2>
+        </div>
+        <div class="skill-columns" id="skills-list"></div>
       </section>
 
       <section class="contact-band" id="contact">
         <div>
-          <p class="eyebrow">Contact</p>
-          <h2>같이 만들고 싶은 일이 있다면 편하게 연락주세요.</h2>
+          <p class="eyebrow" data-i18n="contactEyebrow">Contact</p>
+          <h2 data-i18n="contactTitle">Open to doctoral research conversations and academic collaboration.</h2>
         </div>
         <div class="contact-actions">
-          <a class="button primary" href="mailto:hello@example.com">hello@example.com</a>
-          <button class="button secondary" type="button" data-copy="hello@example.com">
-            이메일 복사
-          </button>
+          <a class="button primary" id="email-link" href="mailto:parksunghyun@yonsei.ac.kr">parksunghyun@yonsei.ac.kr</a>
+          <a class="button secondary" href="admin.html" data-i18n="adminLink">Admin</a>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <span>© 2026 Sunghyun</span>
-      <div>
-        <a href="#">LinkedIn</a>
-        <a href="#">GitHub</a>
-        <a href="#">Resume</a>
-      </div>
+      <span id="footer-name">© 2026 Sunghyun Park</span>
+      <div id="footer-links"></div>
     </footer>
 
     <script src="script.js"></script>
