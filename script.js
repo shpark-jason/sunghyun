@@ -29,7 +29,7 @@ const uiText = {
     heroSecondary: "Download CV",
     currentFocus: "Current Focus",
     interestsEyebrow: "Research Interests",
-    interestsTitle: "Questions that guide my doctoral work",
+    interestsTitle: "Current research interests",
     educationEyebrow: "Education History",
     educationTitle: "Training across media, culture, and communication",
     publicationsEyebrow: "Publications",
@@ -43,8 +43,9 @@ const uiText = {
     methodsEyebrow: "Methods & Skills",
     methodsTitle: "Research toolkit",
     contactEyebrow: "Contact",
-    contactTitle: "Open to doctoral research conversations and academic collaboration.",
+    contactTitle: "Open to research conversations, media policy projects, and academic collaboration.",
     adminLink: "Admin",
+    emailAction: "Send Email",
     viewResearch: "View research details",
     viewEducation: "View education details",
     viewPublications: "View all publications",
@@ -63,7 +64,7 @@ const uiText = {
     heroSecondary: "CV 다운로드",
     currentFocus: "현재 연구 초점",
     interestsEyebrow: "연구 관심사",
-    interestsTitle: "박사과정 연구를 이끄는 질문들",
+    interestsTitle: "최근 연구 관심 주제",
     educationEyebrow: "학력",
     educationTitle: "미디어, 문화, 커뮤니케이션을 가로지르는 연구 훈련",
     publicationsEyebrow: "논문",
@@ -77,8 +78,9 @@ const uiText = {
     methodsEyebrow: "방법론 및 역량",
     methodsTitle: "연구 도구",
     contactEyebrow: "연락처",
-    contactTitle: "박사과정 연구 논의와 학술 협업에 열려 있습니다.",
+    contactTitle: "연구 논의, 미디어 정책 프로젝트, 학술 협업에 열려 있습니다.",
     adminLink: "관리",
+    emailAction: "메일 보내기",
     viewResearch: "연구 상세 보기",
     viewEducation: "학력 상세 보기",
     viewPublications: "논문 전체 보기",
@@ -93,7 +95,7 @@ const fallbackContent = {
   locales: {
     en: {
       name: "Sunghyun Park",
-      status: "PhD Applicant · Media & Platform Studies",
+      status: "Research Portfolio · Media & Platform Studies",
       email: "parksunghyun@yonsei.ac.kr",
       profile:
         "Scholar investigating how digital platforms shape participation, inequality, and user agency in contemporary mediated environments.",
@@ -163,6 +165,11 @@ function renderSite(locale = activeLocale) {
     emailLink.textContent = data.email;
   }
 
+  const emailActionLink = document.querySelector("#email-action-link");
+  if (emailActionLink) {
+    emailActionLink.href = `mailto:${data.email}`;
+  }
+
   const footerName = document.querySelector("#footer-name");
   if (footerName) footerName.textContent = `© 2026 ${data.name}`;
 
@@ -174,63 +181,55 @@ function renderSite(locale = activeLocale) {
     return `<div><dt>${escapeHTML(item.label)}</dt><dd>${escapeHTML(item.value)}</dd></div>`;
   });
 
-  if (data.researchInterests?.[0]) {
-    document.querySelector("#focus-title").textContent = data.researchInterests[0].title;
-    document.querySelector("#focus-summary").textContent = data.researchInterests[0].summary;
-  }
-
   renderList(document.querySelector("#interests-grid"), data.researchInterests, (item, index) => {
     return `<article class="agenda-card">
       <span class="card-index">0${index + 1}</span>
       <div>
-        <h3>${escapeHTML(item.title)}</h3>
+        <h3><a href="details.html?section=interests&item=${index}">${escapeHTML(item.title)}</a></h3>
         <p>${escapeHTML(item.summary)}</p>
       </div>
     </article>`;
   });
 
-  renderList(document.querySelector("#education-list"), (data.education || []).slice(0, 2), (item) => {
+  renderList(document.querySelector("#education-list"), (data.education || []).slice(0, 2), (item, index) => {
     return `<article class="timeline-item">
       <div>
-        <h3>${escapeHTML(item.degree)}</h3>
+        <h3><a href="details.html?section=education&item=${index}">${escapeHTML(item.degree)}</a></h3>
         <p class="timeline-meta">${escapeHTML(item.institution)} · ${escapeHTML(item.location)}</p>
       </div>
       <p>${escapeHTML(item.detail)}</p>
     </article>`;
   });
 
-  renderList(document.querySelector("#publication-list"), (data.publications || []).slice(0, 2), (item) => {
+  renderList(document.querySelector("#publication-list"), (data.publications || []).slice(0, 2), (item, index) => {
     return `<article class="publication-card">
       <span class="publication-type">${escapeHTML(item.type)}</span>
-      <h3>${escapeHTML(item.title)}</h3>
+      <h3><a href="details.html?section=publications&item=${index}">${escapeHTML(item.title)}</a></h3>
       <p>${escapeHTML(item.citation)}</p>
     </article>`;
   });
 
-  renderList(document.querySelector("#presentation-list"), (data.presentations || []).slice(0, 2), (item) => {
+  renderList(document.querySelector("#presentation-list"), (data.presentations || []).slice(0, 2), (item, index) => {
     return `<article class="publication-card">
       <span class="publication-type">${escapeHTML(item.type)}</span>
-      <div>
-        <h3>${escapeHTML(item.title)}</h3>
-        <p>${escapeHTML(item.citation)}</p>
-      </div>
+      <h3><a href="details.html?section=presentations&item=${index}">${escapeHTML(item.title)}</a></h3>
+      <p>${escapeHTML(item.citation)}</p>
     </article>`;
   });
 
-  renderList(document.querySelector("#media-list"), (data.media || []).slice(0, 2), (item) => {
-    const href = item.href ? ` href="${escapeHTML(item.href)}"` : "";
+  renderList(document.querySelector("#media-list"), (data.media || []).slice(0, 2), (item, index) => {
     return `<article class="media-card">
       <span class="media-type">${escapeHTML(item.type)}</span>
-      <h3>${href ? `<a${href}>${escapeHTML(item.title)}</a>` : escapeHTML(item.title)}</h3>
+      <h3><a href="details.html?section=media&item=${index}">${escapeHTML(item.title)}</a></h3>
       <p>${escapeHTML(item.summary)}</p>
     </article>`;
   });
 
-  renderList(document.querySelector("#work-list"), (data.work || data.experience || []).slice(0, 3), (item) => {
+  renderList(document.querySelector("#work-list"), (data.work || data.experience || []).slice(0, 3), (item, index) => {
     const bullets = (item.bullets || []).map((bullet) => `<li>${escapeHTML(bullet)}</li>`).join("");
     return `<article class="timeline-item compact">
       <div>
-        <h3>${escapeHTML(item.role)}</h3>
+        <h3><a href="details.html?section=work&item=${index}">${escapeHTML(item.role)}</a></h3>
         <p class="timeline-meta">${escapeHTML(item.organization)} · ${escapeHTML(item.period)}</p>
       </div>
       <ul>${bullets}</ul>
