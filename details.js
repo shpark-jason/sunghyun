@@ -4,6 +4,8 @@ const sectionLabels = {
     education: "Education History",
     publications: "Publications",
     presentations: "Presentations",
+    projects: "Projects",
+    memberships: "Memberships",
     work: "Work History",
     media: "Media Activity",
     skills: "Methods & Skills",
@@ -13,6 +15,8 @@ const sectionLabels = {
     education: "학력",
     publications: "논문",
     presentations: "발표",
+    projects: "프로젝트",
+    memberships: "소속",
     work: "경력",
     media: "언론 활동",
     skills: "방법론 및 역량",
@@ -115,8 +119,28 @@ function renderDetailsCards(section, data) {
     return;
   }
 
+  if (section === "memberships") {
+    content.innerHTML = (pickItems(data.memberships, itemIndex) || [])
+      .map((item) => {
+        const title = item.href ? `<a href="${escapeHTML(item.href)}">${escapeHTML(item.title)}</a>` : escapeHTML(item.title);
+        return `<article class="media-card">${imageMarkup(item)}<span class="media-type">${escapeHTML(item.type)}</span><h3>${title}</h3><p>${escapeHTML(item.summary || "")}</p>${descriptionMarkup(item)}</article>`;
+      })
+      .join("");
+    return;
+  }
+
   if (section === "presentations") {
     content.innerHTML = renderPublicationCards(pickItems(data.presentations, itemIndex));
+    return;
+  }
+
+  if (section === "projects") {
+    content.innerHTML = (pickItems(data.projects, itemIndex) || [])
+      .map((item) => {
+        const title = item.href ? `<a href="${escapeHTML(item.href)}">${escapeHTML(item.title)}</a>` : escapeHTML(item.title);
+        return `<article class="media-card">${imageMarkup(item)}<span class="media-type">${escapeHTML(item.type)}</span><h3>${title}</h3><p>${escapeHTML(item.summary || "")}</p>${descriptionMarkup(item)}</article>`;
+      })
+      .join("");
     return;
   }
 
@@ -158,6 +182,8 @@ function renderDetails() {
     education: data.education?.[itemIndex]?.degree,
     publications: data.publications?.[itemIndex]?.title,
     presentations: data.presentations?.[itemIndex]?.title,
+    projects: data.projects?.[itemIndex]?.title,
+    memberships: data.memberships?.[itemIndex]?.title,
     media: data.media?.[itemIndex]?.title,
     work: data.work?.[itemIndex]?.role,
   };
