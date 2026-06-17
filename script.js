@@ -147,7 +147,7 @@ function renderSite(locale = activeLocale) {
   const footerName = document.querySelector("#footer-name");
   if (footerName) footerName.textContent = `© 2026 ${data.name}`;
 
-  renderList(document.querySelector("#research-interests"), data.interests, (item) => {
+  renderList(document.querySelector("#research-interests"), (data.interests || []).slice(0, 4), (item) => {
     return `<span class="tag">${escapeHTML(item)}</span>`;
   });
 
