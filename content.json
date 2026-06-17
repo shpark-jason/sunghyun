@@ -1,5 +1,16 @@
 {
   "defaultLocale": "en",
+  "sectionOrder": [
+    "interests",
+    "education",
+    "work",
+    "memberships",
+    "publications",
+    "presentations",
+    "projects",
+    "media",
+    "skills"
+  ],
   "locales": {
     "en": {
       "name": "Sunghyun Park",
@@ -59,6 +70,24 @@
           "detail": "Minor: Global Business. GPA: 3.94 / 4.5. Graduate project: Living as an Elder in the 21st Century, a visual ethnographic study of digital inequality among elderly populations."
         }
       ],
+      "memberships": [
+        {
+          "type": "Professional Membership",
+          "title": "International Communication Association (ICA)",
+          "summary": "Student Member, 2026-Present",
+          "href": "",
+          "description": "",
+          "image": ""
+        },
+        {
+          "type": "Research Membership",
+          "title": "Shinchon Center for Cultural-Politics Research",
+          "summary": "Member",
+          "href": "",
+          "description": "",
+          "image": ""
+        }
+      ],
       "publications": [
         {
           "type": "Refereed Journal Article",
@@ -76,6 +105,16 @@
           "type": "Conference Presentation",
           "title": "K-Pop and Education Migration to Korea in the Digitalised COVID-19 Era",
           "citation": "Park, S., Park, S., & Schutte, S. (2022). Paper presented at the Korean Association for the Study of Popular Music."
+        }
+      ],
+      "projects": [
+        {
+          "type": "Project",
+          "title": "Future research project",
+          "summary": "Use this space for research projects, grants, collaborative work, or digital media projects once they are ready to share.",
+          "href": "",
+          "description": "",
+          "image": ""
         }
       ],
       "media": [
@@ -211,6 +250,24 @@
           "detail": "부전공: 글로벌 비즈니스. GPA: 3.94 / 4.5. 졸업 프로젝트: 21세기 노인으로 산다는 것. 고령층이 디지털화된 공공서비스에 접근하는 과정에서 마주하는 구조적 장벽을 시각 민속지적으로 기록했습니다."
         }
       ],
+      "memberships": [
+        {
+          "type": "전문 학회",
+          "title": "International Communication Association (ICA)",
+          "summary": "Student Member, 2026-현재",
+          "href": "",
+          "description": "",
+          "image": ""
+        },
+        {
+          "type": "연구 모임",
+          "title": "신촌문화정치연구그룹",
+          "summary": "Member",
+          "href": "",
+          "description": "",
+          "image": ""
+        }
+      ],
       "publications": [
         {
           "type": "학술지 논문",
@@ -228,6 +285,16 @@
           "type": "학술 발표",
           "title": "K-Pop and Education Migration to Korea in the Digitalised COVID-19 Era",
           "citation": "Park, S., Park, S., & Schutte, S. (2022). Korean Association for the Study of Popular Music."
+        }
+      ],
+      "projects": [
+        {
+          "type": "프로젝트",
+          "title": "향후 연구 프로젝트",
+          "summary": "공개 가능한 연구 프로젝트, 연구비 과제, 협업 프로젝트, 디지털 미디어 프로젝트가 생기면 이 공간에 추가할 수 있습니다.",
+          "href": "",
+          "description": "",
+          "image": ""
         }
       ],
       "media": [
