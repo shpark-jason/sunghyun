@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="홈으로 이동">
+      <span class="brand-mark">P</span>
+      <span>Portfolio</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 메뉴">
+      <a href="#about">소개</a>
+      <a href="#work">프로젝트</a>
+      <a href="#skills">역량</a>
+      <a href="#contact">연락</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Professional Portfolio</p>
+        <h1>차분하게 문제를 읽고, 완성도 있게 결과를 만드는 사람</h1>
+        <p class="hero-text">
+          안녕하세요. 저는 사용자 경험과 비즈니스 목표를 함께 고려해
+          깔끔하고 신뢰감 있는 디지털 결과물을 만드는 포트폴리오입니다.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#work">프로젝트 보기</a>
+          <a class="button secondary" href="#contact">문의하기</a>
+        </div>
+      </div>
+
+      <aside class="profile-panel" aria-label="프로필 요약">
+        <div class="portrait">
+          <span>YOUR<br />PHOTO</span>
+        </div>
+        <div>
+          <p class="profile-name">홍길동</p>
+          <p class="profile-role">Designer / Developer / Planner</p>
+        </div>
+        <dl class="profile-stats">
+          <div>
+            <dt>Focus</dt>
+            <dd>UX, Web, Branding</dd>
+          </div>
+          <div>
+            <dt>Location</dt>
+            <dd>Seoul, Korea</dd>
+          </div>
+          <div>
+            <dt>Status</dt>
+            <dd>Open to Work</dd>
+          </div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="about" class="section intro-section">
+      <div class="section-heading">
+        <p class="eyebrow">About</p>
+        <h2>복잡한 요구사항을 명료한 화면과 흐름으로 정리합니다.</h2>
+      </div>
+      <p class="section-body">
+        프로젝트의 목적을 먼저 이해하고, 필요한 정보가 잘 읽히는 구조와 일관된 시각 언어를 설계합니다.
+        기획, 디자인, 구현 사이의 간격을 줄이며 실제 사용자가 편하게 느끼는 경험을 만드는 데 집중합니다.
+      </p>
+    </section>
+
+    <section id="work" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Selected Work</p>
+        <h2>대표 프로젝트</h2>
+      </div>
+      <div class="work-grid">
+        <article class="work-card">
+          <p class="work-year">2026</p>
+          <h3>브랜드 웹사이트 리뉴얼</h3>
+          <p>브랜드 신뢰도를 높이기 위한 정보 구조 재설계와 반응형 웹 UI 제작.</p>
+          <span>Web Design</span>
+        </article>
+        <article class="work-card">
+          <p class="work-year">2025</p>
+          <h3>서비스 소개 랜딩페이지</h3>
+          <p>전환율을 고려한 메시지 구조, CTA 배치, 섹션별 콘텐츠 흐름 설계.</p>
+          <span>Landing Page</span>
+        </article>
+        <article class="work-card">
+          <p class="work-year">2025</p>
+          <h3>업무 관리 대시보드</h3>
+          <p>반복 업무를 빠르게 파악할 수 있는 데이터 중심 인터페이스 제작.</p>
+          <span>Dashboard</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section skills-section">
+      <div class="section-heading">
+        <p class="eyebrow">Capabilities</p>
+        <h2>핵심 역량</h2>
+      </div>
+      <div class="skill-list">
+        <div>
+          <h3>Strategy</h3>
+          <p>목표 정의, 사용자 흐름, 콘텐츠 구조 설계</p>
+        </div>
+        <div>
+          <h3>Design</h3>
+          <p>깔끔한 UI, 반응형 레이아웃, 브랜드 톤 정리</p>
+        </div>
+        <div>
+          <h3>Build</h3>
+          <p>HTML, CSS, JavaScript 기반 웹 구현</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>함께 만들 프로젝트가 있다면 편하게 연락주세요.</h2>
+      </div>
+      <a class="contact-link" href="mailto:hello@example.com">hello@example.com</a>
+    </section>
+  </main>
+</body>
+</html>
