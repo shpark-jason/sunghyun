@@ -18,7 +18,7 @@
       "email": "parksunghyun@yonsei.ac.kr",
       "phone": "+82 010-9250-4664",
       "location": "Seoul, Republic of Korea",
-      "portrait": "assets/uploads/kakaotalk-20250623-225716591-1781747329599-dsfxu.jpg",
+      "portrait": "assets/portrait-placeholder.svg",
       "profile": "Scholar investigating how digital platforms shape participation, inequality, and user agency in contemporary mediated environments. My research examines how platform infrastructures organize cultural participation, belonging, mobility, and access while producing uneven conditions of inclusion and exclusion.",
       "interests": [
         "Platform Power and User Agency",
@@ -166,27 +166,15 @@
       "skills": [
         {
           "category": "Qualitative Methods",
-          "items": [
-            "In-depth Interview",
-            "Thematic Analysis",
-            "Visual Ethnography"
-          ]
+          "items": ["In-depth Interview", "Thematic Analysis", "Visual Ethnography"]
         },
         {
           "category": "Research Design",
-          "items": [
-            "Qualitative Study Design",
-            "Theoretical Framework Development",
-            "Policy-oriented Analysis"
-          ]
+          "items": ["Qualitative Study Design", "Theoretical Framework Development", "Policy-oriented Analysis"]
         },
         {
           "category": "Digital Media",
-          "items": [
-            "Adobe Premiere Pro",
-            "Photoshop",
-            "Illustrator"
-          ]
+          "items": ["Adobe Premiere Pro", "Photoshop", "Illustrator"]
         }
       ],
       "links": [
@@ -210,7 +198,7 @@
       "email": "parksunghyun@yonsei.ac.kr",
       "phone": "+82 010-9250-4664",
       "location": "대한민국 서울",
-      "portrait": "assets/uploads/kakaotalk-20250623-225716591-1781747329599-dsfxu.jpg",
+      "portrait": "assets/portrait-placeholder.svg",
       "profile": "디지털 플랫폼이 동시대 매개 환경에서 참여, 불평등, 사용자 행위성을 어떻게 형성하는지 연구합니다. 플랫폼 인프라가 문화적 참여, 소속감, 이동성, 접근성을 조직하는 방식과 동시에 포함과 배제의 불균등한 조건을 생산하는 과정을 분석합니다.",
       "interests": [
         "플랫폼 권력과 사용자 행위성",
@@ -358,27 +346,15 @@
       "skills": [
         {
           "category": "질적 방법론",
-          "items": [
-            "심층 인터뷰",
-            "주제 분석",
-            "시각 민속지"
-          ]
+          "items": ["심층 인터뷰", "주제 분석", "시각 민속지"]
         },
         {
           "category": "연구 설계",
-          "items": [
-            "질적 연구 설계",
-            "이론적 프레임워크 개발",
-            "정책 지향 분석"
-          ]
+          "items": ["질적 연구 설계", "이론적 프레임워크 개발", "정책 지향 분석"]
         },
         {
           "category": "디지털 미디어",
-          "items": [
-            "Adobe Premiere Pro",
-            "Photoshop",
-            "Illustrator"
-          ]
+          "items": ["Adobe Premiere Pro", "Photoshop", "Illustrator"]
         }
       ],
       "links": [
