@@ -41,12 +41,12 @@
         <p class="eyebrow">Content Manager</p>
         <h1>Update the portfolio</h1>
         <p class="lead">
-          Edit content with forms, preview locally, then download <strong>content.json</strong> and upload it to GitHub.
+          Edit content, preview it locally, then publish text and uploaded images directly to the live site.
         </p>
       </section>
 
       <section class="notice">
-        Image fields accept a URL or a site-relative path such as <strong>assets/photo.jpg</strong>. For GitHub Pages, upload the image file to the same path in the repository.
+        Uploaded images are prepared for the web and published together with your text. GitHub Pages normally updates within a few minutes.
       </section>
 
       <section class="cms-layout">
@@ -83,9 +83,11 @@
             <div class="admin-actions">
               <button class="button secondary" type="button" id="change-password">Change Password</button>
               <button class="button primary" type="button" id="save-preview">Preview Locally</button>
+              <button class="button primary" type="button" id="publish-github">Save &amp; Publish</button>
               <button class="button secondary" type="button" id="download-json">Download JSON</button>
             </div>
           </div>
+          <p class="publish-status" id="publish-status" aria-live="polite"></p>
           <form class="field-grid" id="cms-form"></form>
         </section>
       </section>
@@ -112,6 +114,33 @@
       </form>
     </div>
 
-    <script src="admin.js?v=20260617-wave"></script>
+    <div class="admin-lock" id="publish-modal" hidden role="dialog" aria-modal="true" aria-labelledby="publish-title">
+      <form class="admin-lock-card" id="publish-form">
+        <p class="eyebrow">GitHub Pages</p>
+        <h1 id="publish-title">Publish changes</h1>
+        <p class="lock-help">
+          Enter a GitHub fine-grained access token with read and write access to this repository. It is used only for this publishing session.
+        </p>
+        <label>
+          Repository
+          <input id="github-repository" type="text" value="shpark-jason/sunghyun" autocomplete="off" />
+        </label>
+        <label>
+          Branch
+          <input id="github-branch" type="text" value="main" autocomplete="off" />
+        </label>
+        <label>
+          GitHub token
+          <input id="github-token" type="password" autocomplete="off" />
+        </label>
+        <div class="admin-actions">
+          <button class="button primary" type="submit">Publish Now</button>
+          <button class="button secondary" type="button" id="cancel-publish">Cancel</button>
+        </div>
+        <p class="lock-error" id="publish-error" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <script src="admin.js?v=20260618-publish"></script>
   </body>
 </html>
