@@ -570,12 +570,14 @@ function replaceDataImages(value, replacements) {
 
 async function githubRequest(repository, path, token, options = {}) {
   const response = await fetch(`https://api.github.com/repos/${repository}/contents/${path}`, {
+    cache: "no-store",
     ...options,
     headers: {
       Accept: "application/vnd.github+json",
       Authorization: `Bearer ${token}`,
       "X-GitHub-Api-Version": "2022-11-28",
       "Content-Type": "application/json",
+      "Cache-Control": "no-cache",
       ...(options.headers || {}),
     },
   });
@@ -591,18 +593,33 @@ async function githubRequest(repository, path, token, options = {}) {
 }
 
 async function putGithubFile({ repository, branch, token, path, content, message }) {
-  let sha;
-  try {
-    const existing = await githubRequest(repository, `${path}?ref=${encodeURIComponent(branch)}`, token);
-    sha = existing.sha;
-  } catch (error) {
-    if (!String(error.message).startsWith("Not Found")) throw error;
-  }
+  const update = async () => {
+    let sha;
+    try {
+      const cacheBuster = `admin=${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      const existing = await githubRequest(
+        repository,
+        `${path}?ref=${encodeURIComponent(branch)}&${cacheBuster}`,
+        token,
+      );
+      sha = existing.sha;
+    } catch (error) {
+      if (!String(error.message).startsWith("Not Found")) throw error;
+    }
 
-  return githubRequest(repository, path, token, {
-    method: "PUT",
-    body: JSON.stringify({ message, content, branch, ...(sha ? { sha } : {}) }),
-  });
+    return githubRequest(repository, path, token, {
+      method: "PUT",
+      body: JSON.stringify({ message, content, branch, ...(sha ? { sha } : {}) }),
+    });
+  };
+
+  try {
+    return await update();
+  } catch (error) {
+    if (!String(error.message).includes("does not match")) throw error;
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    return update();
+  }
 }
 
 publishForm.addEventListener("submit", async (event) => {
