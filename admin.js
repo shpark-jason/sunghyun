@@ -9,9 +9,14 @@ const lockError = document.querySelector("#lock-error");
 const passwordModal = document.querySelector("#password-modal");
 const passwordForm = document.querySelector("#password-form");
 const passwordError = document.querySelector("#password-error");
+const publishModal = document.querySelector("#publish-modal");
+const publishForm = document.querySelector("#publish-form");
+const publishError = document.querySelector("#publish-error");
+const publishStatus = document.querySelector("#publish-status");
 
 let contentData;
 let selectedIndex = 0;
+const uploadedImageNames = new Map();
 
 const locales = [
   { key: "en", label: "English" },
@@ -225,8 +230,7 @@ function currentItem(locale) {
   if (section === "sectionOrder") return contentData;
   if (section === "profile") return localeData(locale);
   const items = collection(locale, section);
-  if (items.length === 0) items.push(sectionConfig[section].create());
-  return items[Math.min(selectedIndex, items.length - 1)];
+  return items[Math.min(selectedIndex, items.length - 1)] || null;
 }
 
 function sharedItem() {
@@ -324,7 +328,12 @@ function renderItemList() {
 
   const enItems = collection("en", section);
   const koItems = collection("ko", section);
-  const length = Math.max(enItems.length, koItems.length, 1);
+  const length = Math.max(enItems.length, koItems.length);
+  if (length === 0) {
+    selectedIndex = 0;
+    itemList.innerHTML = `<p class="shared-note">No items yet. Select Add Item to create one.</p>`;
+    return;
+  }
   while (enItems.length < length) enItems.push(sectionConfig[section].create());
   while (koItems.length < length) koItems.push(sectionConfig[section].create());
   selectedIndex = Math.min(selectedIndex, length - 1);
@@ -382,6 +391,13 @@ function renderForm() {
     return;
   }
 
+  if (!currentItem("en")) {
+    editorEyebrow.textContent = config.label;
+    editorTitle.textContent = "No items";
+    form.innerHTML = `<section class="locale-editor shared-editor"><p class="shared-note">Select Add Item to create content for this section.</p></section>`;
+    return;
+  }
+
   editorEyebrow.textContent = config.label;
   editorTitle.textContent = section === "profile" ? "Edit main profile" : itemLabel(currentItem("en"), section) || "Edit item";
 
@@ -417,22 +433,54 @@ function renderForm() {
   });
 
   form.querySelectorAll("input[type='file']").forEach((input) => {
-    input.addEventListener("change", () => {
+    input.addEventListener("change", async () => {
       const file = input.files?.[0];
       if (!file) return;
-      const reader = new FileReader();
-      reader.addEventListener("load", () => {
+      try {
+        const imageData = await prepareImage(file);
+        uploadedImageNames.set(imageData, file.name);
         if (input.dataset.locale === "shared") {
           locales.forEach(({ key }) => {
-            currentItem(key)[input.dataset.target] = reader.result;
+            currentItem(key)[input.dataset.target] = imageData;
           });
         } else {
-          currentItem(input.dataset.locale)[input.dataset.target] = reader.result;
+          currentItem(input.dataset.locale)[input.dataset.target] = imageData;
         }
         renderAdmin();
-      });
-      reader.readAsDataURL(file);
+      } catch (error) {
+        publishStatus.textContent = error.message;
+      }
     });
+  });
+}
+
+function prepareImage(file) {
+  return new Promise((resolve, reject) => {
+    if (!file.type.startsWith("image/")) {
+      reject(new Error("Please select an image file."));
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.addEventListener("error", () => reject(new Error("The image could not be read.")));
+    reader.addEventListener("load", () => {
+      const image = new Image();
+      image.addEventListener("error", () => reject(new Error("The image could not be prepared.")));
+      image.addEventListener("load", () => {
+        const maxSize = 1800;
+        const scale = Math.min(1, maxSize / Math.max(image.naturalWidth, image.naturalHeight));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+        const context = canvas.getContext("2d");
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", 0.86));
+      });
+      image.src = reader.result;
+    });
+    reader.readAsDataURL(file);
   });
 }
 
@@ -462,7 +510,6 @@ document.querySelector("#delete-item").addEventListener("click", () => {
   locales.forEach(({ key }) => {
     const items = collection(key, section);
     if (items.length > 0) items.splice(selectedIndex, 1);
-    if (items.length === 0) items.push(sectionConfig[section].create());
   });
   selectedIndex = Math.max(0, selectedIndex - 1);
   renderAdmin();
@@ -471,6 +518,155 @@ document.querySelector("#delete-item").addEventListener("click", () => {
 document.querySelector("#save-preview").addEventListener("click", () => {
   localStorage.setItem("portfolioContentDraft", JSON.stringify(contentData, null, 2));
   window.location.href = "index.html";
+});
+
+document.querySelector("#publish-github").addEventListener("click", () => {
+  publishError.textContent = "";
+  publishModal.hidden = false;
+});
+
+document.querySelector("#cancel-publish").addEventListener("click", () => {
+  publishModal.hidden = true;
+});
+
+function bytesToBase64(bytes) {
+  let binary = "";
+  const chunkSize = 0x8000;
+  for (let index = 0; index < bytes.length; index += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + chunkSize));
+  }
+  return btoa(binary);
+}
+
+function utf8ToBase64(value) {
+  return bytesToBase64(new TextEncoder().encode(value));
+}
+
+function dataUrlToBase64(dataUrl) {
+  return dataUrl.slice(dataUrl.indexOf(",") + 1);
+}
+
+function safeImageName(value) {
+  const base = (value || "image").replace(/\.[^.]+$/, "").toLowerCase();
+  const cleaned = base.replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 48);
+  return `${cleaned || "image"}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}.jpg`;
+}
+
+function findDataImages(value, results = new Set()) {
+  if (typeof value === "string" && value.startsWith("data:image/")) results.add(value);
+  if (Array.isArray(value)) value.forEach((item) => findDataImages(item, results));
+  if (value && typeof value === "object") Object.values(value).forEach((item) => findDataImages(item, results));
+  return results;
+}
+
+function replaceDataImages(value, replacements) {
+  if (typeof value === "string") return replacements.get(value) || value;
+  if (Array.isArray(value)) return value.map((item) => replaceDataImages(item, replacements));
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, replaceDataImages(item, replacements)]));
+  }
+  return value;
+}
+
+async function githubRequest(repository, path, token, options = {}) {
+  const response = await fetch(`https://api.github.com/repos/${repository}/contents/${path}`, {
+    ...options,
+    headers: {
+      Accept: "application/vnd.github+json",
+      Authorization: `Bearer ${token}`,
+      "X-GitHub-Api-Version": "2022-11-28",
+      "Content-Type": "application/json",
+      ...(options.headers || {}),
+    },
+  });
+  if (!response.ok) {
+    let message = `${response.status} ${response.statusText}`;
+    try {
+      const error = await response.json();
+      message = error.message || message;
+    } catch {}
+    throw new Error(message);
+  }
+  return response.json();
+}
+
+async function putGithubFile({ repository, branch, token, path, content, message }) {
+  let sha;
+  try {
+    const existing = await githubRequest(repository, `${path}?ref=${encodeURIComponent(branch)}`, token);
+    sha = existing.sha;
+  } catch (error) {
+    if (!String(error.message).startsWith("Not Found")) throw error;
+  }
+
+  return githubRequest(repository, path, token, {
+    method: "PUT",
+    body: JSON.stringify({ message, content, branch, ...(sha ? { sha } : {}) }),
+  });
+}
+
+publishForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const repository = document.querySelector("#github-repository").value.trim();
+  const branch = document.querySelector("#github-branch").value.trim() || "main";
+  const token = document.querySelector("#github-token").value.trim();
+  const submitButton = publishForm.querySelector("button[type='submit']");
+
+  if (!repository.includes("/") || !token) {
+    publishError.textContent = "Enter the repository and GitHub token.";
+    return;
+  }
+
+  publishError.textContent = "";
+  submitButton.disabled = true;
+  submitButton.textContent = "Publishing...";
+
+  try {
+    const replacements = new Map();
+    const images = Array.from(findDataImages(contentData));
+
+    for (let index = 0; index < images.length; index += 1) {
+      publishStatus.textContent = `Uploading image ${index + 1} of ${images.length}...`;
+      const imageData = images[index];
+      const filename = safeImageName(uploadedImageNames.get(imageData));
+      const path = `assets/uploads/${filename}`;
+      await putGithubFile({
+        repository,
+        branch,
+        token,
+        path,
+        content: dataUrlToBase64(imageData),
+        message: `Upload portfolio image: ${filename}`,
+      });
+      replacements.set(imageData, path);
+    }
+
+    const publishedContent = replaceDataImages(contentData, replacements);
+    publishStatus.textContent = "Publishing portfolio content...";
+    await putGithubFile({
+      repository,
+      branch,
+      token,
+      path: "content.json",
+      content: utf8ToBase64(JSON.stringify(publishedContent, null, 2)),
+      message: "Update portfolio content",
+    });
+
+    contentData = publishedContent;
+    localStorage.removeItem("portfolioContentDraft");
+    publishModal.hidden = true;
+    publishForm.reset();
+    document.querySelector("#github-repository").value = repository;
+    document.querySelector("#github-branch").value = branch;
+    publishStatus.innerHTML = `Published successfully. <a href="https://${repository.split("/")[0]}.github.io/${repository.split("/")[1]}/" target="_blank" rel="noopener">Open live site</a>`;
+    renderAdmin();
+  } catch (error) {
+    publishError.textContent = `Publishing failed: ${error.message}`;
+    publishStatus.textContent = "";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Publish Now";
+  }
 });
 
 document.querySelector("#download-json").addEventListener("click", () => {
