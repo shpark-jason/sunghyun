@@ -1,5 +1,6 @@
 {
   "defaultLocale": "en",
+  "portrait": "assets/portrait-placeholder.svg",
   "sectionOrder": [
     "interests",
     "education",
