@@ -1,146 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Admin | Sunghyun Park</title>
     <meta name="robots" content="noindex" />
-    <link rel="stylesheet" href="styles.css?v=20260617-wave" />
+    <meta http-equiv="refresh" content="2;url=https://app.pagescms.org/" />
+    <title>Portfolio CMS | Sunghyun Park</title>
+    <link rel="stylesheet" href="styles.css?v=20260622-cms" />
   </head>
   <body>
-    <div class="admin-lock" id="admin-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
-      <form class="admin-lock-card" id="lock-form">
-        <p class="eyebrow">Protected</p>
-        <h1 id="lock-title">Admin Access</h1>
-        <p class="lock-help">Enter the password to edit this portfolio.</p>
-        <label>
-          Password
-          <input id="admin-password" type="password" inputmode="numeric" autocomplete="current-password" />
-        </label>
-        <button class="button primary" type="submit">Enter</button>
-        <p class="lock-error" id="lock-error" aria-live="polite"></p>
-      </form>
-    </div>
-
-    <header class="site-header">
-      <a class="brand" href="index.html" aria-label="Back to site">
-        <span class="brand-mark">SP</span>
-        <span>Portfolio Admin</span>
-      </a>
-      <div class="header-tools">
-        <nav class="nav" aria-label="Admin navigation">
-          <a href="index.html">Site</a>
-          <a href="details.html">Details</a>
-          <a href="content.json">Content</a>
-        </nav>
-      </div>
-    </header>
-
     <main class="admin-shell">
-      <section class="admin-header">
-        <p class="eyebrow">Content Manager</p>
-        <h1>Update the portfolio</h1>
-        <p class="lead">
-          Edit content, preview it locally, then publish text and uploaded images directly to the live site.
+      <section class="admin-card cms-redirect">
+        <p class="eyebrow">Portfolio CMS</p>
+        <h1>관리자 페이지로 이동합니다</h1>
+        <p>
+          Pages CMS에서 GitHub로 로그인한 뒤 <strong>shpark-jason/sunghyun</strong> 저장소를 선택하세요.
+          글과 프로필 사진을 수정하면 공개 사이트에 자동으로 반영됩니다.
         </p>
-      </section>
-
-      <section class="notice">
-        Uploaded images are prepared for the web and published together with your text. GitHub Pages normally updates within a few minutes.
-      </section>
-
-      <section class="cms-layout">
-        <aside class="admin-card cms-sidebar">
-          <label>
-            Section
-            <select id="section-select">
-              <option value="profile">Profile</option>
-              <option value="researchInterests">Research Interests</option>
-              <option value="education">Education History</option>
-              <option value="work">Work History</option>
-              <option value="memberships">Memberships</option>
-              <option value="publications">Publications</option>
-              <option value="presentations">Presentations</option>
-              <option value="projects">Projects</option>
-              <option value="media">Columns & Media</option>
-              <option value="skills">Methods & Skills</option>
-              <option value="sectionOrder">Section Order</option>
-            </select>
-          </label>
-          <div class="cms-list" id="item-list"></div>
-          <div class="admin-actions">
-            <button class="button primary" type="button" id="add-item">Add Item</button>
-            <button class="button secondary danger" type="button" id="delete-item">Delete Item</button>
-          </div>
-        </aside>
-
-        <section class="admin-card cms-editor">
-          <div class="cms-editor-header">
-            <div>
-              <p class="eyebrow" id="editor-eyebrow">Profile</p>
-              <h2 id="editor-title">Edit content</h2>
-            </div>
-            <div class="admin-actions">
-              <button class="button secondary" type="button" id="change-password">Change Password</button>
-              <button class="button primary" type="button" id="save-preview">Preview Locally</button>
-              <button class="button primary" type="button" id="publish-github">Save &amp; Publish</button>
-              <button class="button secondary" type="button" id="download-json">Download JSON</button>
-            </div>
-          </div>
-          <p class="publish-status" id="publish-status" aria-live="polite"></p>
-          <form class="field-grid" id="cms-form"></form>
-        </section>
+        <a class="button primary" href="https://app.pagescms.org/">Pages CMS 열기</a>
       </section>
     </main>
-
-    <div class="admin-lock" id="password-modal" hidden role="dialog" aria-modal="true" aria-labelledby="password-title">
-      <form class="admin-lock-card" id="password-form">
-        <p class="eyebrow">Security</p>
-        <h1 id="password-title">Change Password</h1>
-        <p class="lock-help">Use a 4-digit numeric password.</p>
-        <label>
-          Current password
-          <input id="current-password" type="password" inputmode="numeric" maxlength="4" />
-        </label>
-        <label>
-          New password
-          <input id="new-password" type="password" inputmode="numeric" maxlength="4" />
-        </label>
-        <div class="admin-actions">
-          <button class="button primary" type="submit">Save</button>
-          <button class="button secondary" type="button" id="cancel-password">Cancel</button>
-        </div>
-        <p class="lock-error" id="password-error" aria-live="polite"></p>
-      </form>
-    </div>
-
-    <div class="admin-lock" id="publish-modal" hidden role="dialog" aria-modal="true" aria-labelledby="publish-title">
-      <form class="admin-lock-card" id="publish-form">
-        <p class="eyebrow">GitHub Pages</p>
-        <h1 id="publish-title">Publish changes</h1>
-        <p class="lock-help">
-          Enter a GitHub fine-grained access token with read and write access to this repository. It is used only for this publishing session.
-        </p>
-        <label>
-          Repository
-          <input id="github-repository" type="text" value="shpark-jason/sunghyun" autocomplete="off" />
-        </label>
-        <label>
-          Branch
-          <input id="github-branch" type="text" value="main" autocomplete="off" />
-        </label>
-        <label>
-          GitHub token
-          <input id="github-token" type="password" autocomplete="off" />
-        </label>
-        <div class="admin-actions">
-          <button class="button primary" type="submit">Publish Now</button>
-          <button class="button secondary" type="button" id="cancel-publish">Cancel</button>
-        </div>
-        <p class="lock-error" id="publish-error" aria-live="polite"></p>
-      </form>
-    </div>
-
-    <script src="admin.js?v=20260622-fetch-fix"></script>
   </body>
 </html>
