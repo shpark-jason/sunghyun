@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { site } from "../data/site";
+---
+<BaseLayout title="Contact">
+  <PageIntro eyebrow="Contact" title="Let’s start a conversation." text="I welcome thoughtful questions, research collaborations, and opportunities to exchange ideas." />
+  <section class="shell contact-grid">
+    <div class="contact-primary">
+      <p>The best way to reach me is by email.</p>
+      <a class="email-link" href={`mailto:${site.email}`}>{site.email}<span>↗</span></a>
+    </div>
+    <div class="contact-details">
+      <div><span>Affiliation</span><p>{site.institution}</p></div>
+      <div><span>Location</span><p>{site.location}</p></div>
+      <div>
+        <span>Elsewhere</span>
+        <p class="contact-links">
+          <a href={site.links.scholar}>Google Scholar ↗</a>
+          <a href={site.links.orcid}>ORCID ↗</a>
+          <a href={site.links.github}>GitHub ↗</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

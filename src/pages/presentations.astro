@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { presentations } from "../data/site";
+---
+<BaseLayout title="Presentations">
+  <PageIntro eyebrow="Talks & teaching" title="Presentations" text="Conference presentations, invited talks, workshops, and conversations with research communities." />
+  <section class="shell section">
+    <div class="talk-list">
+      {presentations.map((item, index) => (
+        <article>
+          <span class="talk-number">0{index + 1}</span>
+          <div><span class="meta">{item.kind}</span><h2>{item.title}</h2><p>{item.event}</p></div>
+          <time>{item.date}</time>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

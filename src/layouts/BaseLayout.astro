@@ -1,0 +1,83 @@
+---
+import { site } from "../data/site";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = site.name,
+  description = site.intro,
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const url = (path: string) => path === "/" ? `${base}/` : `${base}${path}`;
+const nav = [
+  ["/", "Home"],
+  ["/about", "About"],
+  ["/education", "Education & Experience"],
+  ["/publications", "Publications"],
+  ["/presentations", "Presentations"],
+  ["/projects", "Projects"],
+  ["/news", "News"],
+  ["/blog", "Blog"],
+  ["/contact", "Contact"],
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f4f0e7" />
+    <link rel="icon" type="image/svg+xml" href={url("/favicon.svg")} />
+    <title>{title === site.name ? title : `${title} — ${site.name}`}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={url("/")} aria-label={`${site.name} home`}>
+        <span class="brand-mark">{site.shortName}</span>
+        <span class="brand-name">{site.name}</span>
+      </a>
+      <button class="menu-button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        {nav.map(([href, label]) => (
+          <a href={url(href)} class:list={{ active: href === "/" ? pathname === url("/") : pathname.startsWith(url(href)) }}>
+            {label}
+          </a>
+        ))}
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div>
+        <p class="footer-name">{site.name}</p>
+        <p>{site.institution}</p>
+      </div>
+      <div class="footer-links">
+        <a href={site.links.scholar}>Google Scholar</a>
+        <a href={site.links.orcid}>ORCID</a>
+        <a href={site.links.github}>GitHub</a>
+      </div>
+      <p class="copyright">© {new Date().getFullYear()} {site.name}</p>
+    </footer>
+    <script>
+      const button = document.querySelector(".menu-button");
+      const nav = document.querySelector(".site-nav");
+      button?.addEventListener("click", () => {
+        const open = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!open));
+        nav?.classList.toggle("open", !open);
+      });
+    </script>
+  </body>
+</html>

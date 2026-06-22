@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { education, experience } from "../data/site";
+---
+<BaseLayout title="Education & Experience">
+  <PageIntro eyebrow="Curriculum vitae" title="Education & Experience" text="The institutions, roles, and collaborations that have shaped my research." />
+  <section class="shell cv-grid">
+    <div>
+      <h2 class="subheading">Education</h2>
+      <div class="timeline">
+        {education.map((item) => (
+          <article>
+            <time>{item.period}</time>
+            <div><h3>{item.title}</h3><p class="place">{item.place}</p><p>{item.detail}</p></div>
+          </article>
+        ))}
+      </div>
+    </div>
+    <div>
+      <h2 class="subheading">Experience</h2>
+      <div class="timeline">
+        {experience.map((item) => (
+          <article>
+            <time>{item.period}</time>
+            <div><h3>{item.title}</h3><p class="place">{item.place}</p><p>{item.detail}</p></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { projects } from "../data/site";
+---
+<BaseLayout title="Projects">
+  <PageIntro eyebrow="Research in motion" title="Projects" text="Longer arcs of inquiry, built with collaborators across disciplines and institutions." />
+  <section class="shell section project-list">
+    {projects.map((item) => (
+      <article class="project-card">
+        <div class="project-top"><span>{item.number}</span><span class:list={["status", item.status.toLowerCase()]}>{item.status}</span></div>
+        <h2>{item.title}</h2>
+        <p>{item.description}</p>
+        <div class="tag-list">{item.tags.map((tag) => <span>{tag}</span>)}</div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

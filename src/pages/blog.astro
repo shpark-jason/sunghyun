@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { blogPosts, site } from "../data/site";
+---
+<BaseLayout title="Blog">
+  <PageIntro eyebrow="Field notes" title="Blog & Instagram" text="Informal notes on research, teaching, conferences, and the texture of everyday academic life." />
+  <section class="shell section">
+    <div class="blog-source-links">
+      <a href={site.links.tistory}>Visit Tistory <span>↗</span></a>
+      <a href={site.links.instagram}>Follow on Instagram <span>↗</span></a>
+    </div>
+    <div class="blog-grid">
+      {blogPosts.map((post) => (
+        <a class="blog-card" href={post.url} target="_blank" rel="noreferrer">
+          <div class:list={["blog-art", post.tone]}>
+            <span class="source-pill">{post.source}</span>
+            <span class="art-symbol">{post.source === "Instagram" ? "◎" : "T"}</span>
+          </div>
+          <div class="blog-copy">
+            <time>{post.date}</time>
+            <h2>{post.title}</h2>
+            <p>{post.excerpt}</p>
+            <span class="read-more">Read original <span>↗</span></span>
+          </div>
+        </a>
+      ))}
+    </div>
+    <p class="blog-note">새 글을 추가하려면 <code>src/data/site.ts</code>의 <code>blogPosts</code>에 Tistory 또는 Instagram URL을 한 줄 추가하면 됩니다.</p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { news } from "../data/site";
+---
+<BaseLayout title="News">
+  <PageIntro eyebrow="News" title="Notes from the lab" text="Recent publications, talks, collaborations, and other small milestones." />
+  <section class="shell section news-list">
+    {news.map((item) => (
+      <article>
+        <time>{item.date}</time>
+        <div><h2>{item.title}</h2><p>{item.text}</p></div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

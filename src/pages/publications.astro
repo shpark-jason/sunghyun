@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { publications } from "../data/site";
+---
+<BaseLayout title="Publications">
+  <PageIntro eyebrow="Research output" title="Publications" text="Peer-reviewed work on human-centered AI, technology use, and digital well-being." />
+  <section class="shell section">
+    <div class="filter-row"><span class="active">All</span><span>Journal articles</span><span>Conference papers</span></div>
+    <div class="publication-list large">
+      {publications.map((item) => (
+        <a class="publication-row" href={item.link}>
+          <span class="publication-year">{item.year}</span>
+          <span class="publication-main">
+            <span class="meta">{item.type} · {item.venue}</span>
+            <strong>{item.title}</strong>
+            <span>{item.authors}</span>
+            {item.note && <span class="award">{item.note}</span>}
+          </span>
+          <span class="row-arrow">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

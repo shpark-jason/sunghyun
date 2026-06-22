@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, publications, news } from "../data/site";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const url = (path: string) => `${base}${path}`;
+---
+<BaseLayout>
+  <section class="hero shell">
+    <div class="hero-copy">
+      <div class="hero-index">
+        <span>Independent researcher</span>
+        <span>Seoul, KR</span>
+        <span>2026</span>
+      </div>
+      <h1>Research for a more <em>human</em> technological future.</h1>
+      <p class="hero-lede">{site.intro}</p>
+      <div class="button-row">
+        <a class="button primary" href={url("/publications")}>Explore my research <span>↗</span></a>
+        <a class="button text" href={url("/contact")}>Get in touch <span>→</span></a>
+      </div>
+    </div>
+    <div class="hero-side" aria-label="Research profile">
+      <div class="hero-stamp">{site.shortName}</div>
+      <div class="hero-side-copy">
+        <span>Focus</span>
+        <p>{site.interests.join(" · ")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="research-strip">
+    <div class="shell">
+      <p class="eyebrow">Current research interests</p>
+      <div class="interest-list">
+        {site.interests.map((interest, index) => (
+          <div><span>0{index + 1}</span><strong>{interest}</strong></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Selected work</p>
+        <h2>Recent publications</h2>
+      </div>
+      <a class="arrow-link" href={url("/publications")}>View all publications <span>→</span></a>
+    </div>
+    <div class="publication-list">
+      {publications.slice(0, 3).map((item) => (
+        <a class="publication-row" href={item.link}>
+          <span class="publication-year">{item.year}</span>
+          <span class="publication-main">
+            <span class="meta">{item.type} · {item.venue}</span>
+            <strong>{item.title}</strong>
+            <span>{item.authors}</span>
+          </span>
+          <span class="row-arrow">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section shell home-news">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Updates</p>
+        <h2>Latest news</h2>
+      </div>
+      <a class="arrow-link" href={url("/news")}>All news <span>→</span></a>
+    </div>
+    <div class="news-grid">
+      {news.map((item) => (
+        <article class="news-card">
+          <time>{item.date}</time>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="closing-cta">
+    <div class="shell">
+      <p class="eyebrow">Open to conversation</p>
+      <h2>Have a question, an idea,<br />or a project in mind?</h2>
+      <a class="button light" href={url("/contact")}>Let’s talk <span>↗</span></a>
+    </div>
+  </section>
+</BaseLayout>

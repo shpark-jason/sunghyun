@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { site } from "../data/site";
+---
+<BaseLayout title="About">
+  <PageIntro eyebrow="About" title="Curiosity, rigor, and care." text="I am a researcher interested in the points where technology becomes part of everyday human judgment." />
+  <section class="shell split-section">
+    <div class="about-visual">
+      <span>{site.shortName}</span>
+    </div>
+    <div class="prose">
+      <p class="dropcap">My work begins with a simple question: how can technology expand what people are able to understand and do, without quietly diminishing their agency?</p>
+      <p>I combine qualitative fieldwork, experiments, and computational methods to study the relationship between people and intelligent systems. I care equally about theoretical clarity and the practical consequences of design decisions.</p>
+      <p>Outside the lab, I enjoy long walks, marginal notes, small museums, and conversations that wander somewhere unexpected.</p>
+      <div class="facts">
+        <div><span>Based in</span><strong>{site.location}</strong></div>
+        <div><span>Languages</span><strong>Korean · English</strong></div>
+        <div><span>Research style</span><strong>Interdisciplinary · Mixed methods</strong></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
