@@ -23,7 +23,7 @@ const url = (path: string) => `${base}${path}`;
       <div class="hero-stamp">{site.shortName}</div>
       <div class="hero-side-copy">
         <span>Focus</span>
-        <p>{site.interests.join(" · ")}</p>
+        <p>Media Studies · Information Studies · Critical Platform Research</p>
       </div>
     </div>
   </section>
@@ -32,7 +32,7 @@ const url = (path: string) => `${base}${path}`;
     <div class="shell">
       <p class="eyebrow">Current research interests</p>
       <div class="interest-list">
-        {site.interests.map((interest, index) => (
+        {site.interests.slice(0, 3).map((interest, index) => (
           <div><span>0{index + 1}</span><strong>{interest}</strong></div>
         ))}
       </div>

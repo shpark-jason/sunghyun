@@ -1,23 +1,37 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
-import { site } from "../data/site";
+import { site, methods, languages, memberships } from "../data/site";
 ---
 <BaseLayout title="About">
-  <PageIntro eyebrow="About" title="Curiosity, rigor, and care." text="I am a researcher interested in the points where technology becomes part of everyday human judgment." />
+  <PageIntro eyebrow="About" title="Platforms are never neutral." text={site.profile} />
   <section class="shell split-section">
     <div class="about-visual">
       <span>{site.shortName}</span>
     </div>
     <div class="prose">
-      <p class="dropcap">My work begins with a simple question: how can technology expand what people are able to understand and do, without quietly diminishing their agency?</p>
-      <p>I combine qualitative fieldwork, experiments, and computational methods to study the relationship between people and intelligent systems. I care equally about theoretical clarity and the practical consequences of design decisions.</p>
-      <p>Outside the lab, I enjoy long walks, marginal notes, small museums, and conversations that wander somewhere unexpected.</p>
+      <p class="dropcap">My work begins with a question: how do digital infrastructures set the terms through which people participate, move, belong, and gain access?</p>
+      <p>I study platform power not as an abstract technical force, but as something encountered through everyday cultural participation. My research traces the uneven conditions of inclusion and exclusion produced through design, governance, and institutional context.</p>
+      <p>Methodologically, I draw on interviews, thematic analysis, and visual ethnography to connect lived experience with broader structures of media power.</p>
       <div class="facts">
         <div><span>Based in</span><strong>{site.location}</strong></div>
-        <div><span>Languages</span><strong>Korean · English</strong></div>
-        <div><span>Research style</span><strong>Interdisciplinary · Mixed methods</strong></div>
+        <div><span>Languages</span><strong>{languages.map((item) => item.language).join(" · ")}</strong></div>
+        <div><span>Research style</span><strong>Qualitative · Critical · Interdisciplinary</strong></div>
       </div>
+    </div>
+  </section>
+  <section class="shell profile-matrix">
+    <div>
+      <p class="eyebrow">Methods & skills</p>
+      {methods.map((group) => (
+        <div class="profile-row"><span>{group.category}</span><strong>{group.items.join(" · ")}</strong></div>
+      ))}
+    </div>
+    <div>
+      <p class="eyebrow">Memberships</p>
+      {memberships.map((item) => (
+        <div class="profile-row"><span>{item.period}</span><strong>{item.title}, {item.place}</strong></div>
+      ))}
     </div>
   </section>
 </BaseLayout>

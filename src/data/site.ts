@@ -1,17 +1,26 @@
 export const site = {
-  name: "Dr. Your Name",
-  shortName: "YN",
-  role: "Researcher · Assistant Professor",
-  institution: "Department of Your Field, Your University",
+  name: "Sunghyun Park",
+  shortName: "SP",
+  role: "Media & Platform Studies Researcher",
+  institution: "Yonsei University, Graduate School of Communication & Arts",
   location: "Seoul, Republic of Korea",
-  email: "your.name@university.ac.kr",
+  email: "parksunghyun@yonsei.ac.kr",
   intro:
-    "I study how people, technology, and institutions shape one another—and translate those findings into systems that work better in the real world.",
-  interests: ["Human–AI Interaction", "Computational Social Science", "Digital Well-being"],
+    "I investigate how digital platforms shape participation, inequality, and user agency in contemporary mediated environments.",
+  profile:
+    "My research examines how platform infrastructures organize cultural participation, belonging, mobility, and access, while also producing uneven conditions of inclusion and exclusion. Drawing on qualitative methods, I situate my work at the intersection of media studies, information studies, and critical platform research.",
+  interests: [
+    "Platform Power & User Agency",
+    "Digital Inequality",
+    "Critical Platform Governance",
+    "Media, Technology & Society",
+    "Digital Spatiality",
+    "Social Class & Cultural Capital",
+  ],
   links: {
     scholar: "https://scholar.google.com/",
     orcid: "https://orcid.org/",
-    github: "https://github.com/",
+    github: "https://github.com/shpark-jason",
     tistory: "https://example.tistory.com",
     instagram: "https://www.instagram.com/",
   },
@@ -19,176 +28,198 @@ export const site = {
 
 export const education = [
   {
-    period: "2021 — 2025",
-    title: "Ph.D. in Your Field",
-    place: "Your University",
-    detail: "Dissertation: A concise title describing your central research question",
+    period: "M.A.",
+    title: "M.A. in Media and Cultural Studies",
+    place: "Yonsei University, Graduate School of Communication & Arts",
+    detail:
+      "GPA 4.07/4.3 · Thesis: Sense of Place in Digital Travel: User Experience in Online Guided Tours and Metaverse Travel",
   },
   {
-    period: "2018 — 2020",
-    title: "M.S. in Your Field",
-    place: "Your University",
-    detail: "Focus on research methods, data analysis, and applied systems",
-  },
-  {
-    period: "2013 — 2017",
-    title: "B.A. in Your Field",
-    place: "Your University",
-    detail: "Graduated with honors",
+    period: "B.A.",
+    title: "B.A. in Global Media & Communication Arts",
+    place: "Woosong University",
+    detail:
+      "Minor in Global Business · GPA 3.94/4.5 · Graduate project: Living as an Elder in the 21st Century",
   },
 ];
 
 export const experience = [
   {
-    period: "2025 — Present",
-    title: "Assistant Professor",
-    place: "Your University",
-    detail: "Leading research and teaching in human-centered technology.",
+    period: "02/2026 — Present",
+    title: "Activist",
+    place: "Center for Media Responsibility and Human Rights",
+    detail:
+      "Researching media-related human rights violations, digital rights, platform accountability, and user protection; contributing to policy reports and educational programs.",
   },
   {
-    period: "2023 — 2025",
-    title: "Research Fellow",
-    place: "Research Institute",
-    detail: "Built and evaluated interventions with interdisciplinary teams.",
+    period: "10/2022 — Present",
+    title: "Professional Monitor for Protection of Rights",
+    place: "Korea Communication Standards Commission",
+    detail:
+      "Monitoring broadcast and platform content, analyzing rights violations and governance gaps, and producing reports on content moderation and regulatory effectiveness.",
+  },
+  {
+    period: "03/2023 — 12/2023",
+    title: "Culture Division Participant",
+    place: "Sejong City Youth Policy Network",
+    detail:
+      "Proposed digital infrastructure for a database archive of youth cultural activities and contributed to municipal cultural-data governance deliberations.",
+  },
+  {
+    period: "03/2021 — 05/2021",
+    title: "Promoting Activity",
+    place: "Korea Heritage Agency",
+    detail:
+      "Produced content for the 2021 Royal Culture Festival and analyzed how platform strategies shaped public engagement with cultural heritage.",
+  },
+  {
+    period: "07/2017 — 01/2021",
+    title: "Oboist",
+    place: "Korea Army Academy at Yeongcheon Band",
+    detail:
+      "Performed at national and international diplomatic events, including joint performances with U.S. military forces.",
   },
 ];
 
 export const publications = [
   {
-    year: "2026",
-    type: "Journal Article",
-    title: "Designing Human-Centered AI Systems for Meaningful Everyday Use",
-    authors: "Your Name, Collaborator A, Collaborator B",
-    venue: "Journal of Human–Computer Interaction",
-    note: "Forthcoming",
-    link: "#",
-  },
-  {
     year: "2025",
-    type: "Conference Paper",
-    title: "Beyond Accuracy: Understanding Trust Calibration in AI-Assisted Decisions",
-    authors: "Your Name, Collaborator C",
-    venue: "ACM CHI Conference on Human Factors in Computing Systems",
-    note: "Best Paper Honorable Mention",
-    link: "#",
-  },
-  {
-    year: "2024",
-    type: "Journal Article",
-    title: "Digital Routines and Well-being: Evidence from a Longitudinal Field Study",
-    authors: "Your Name, Collaborator D, Collaborator E",
-    venue: "Computers in Human Behavior",
-    note: "",
-    link: "#",
-  },
-  {
-    year: "2023",
-    type: "Conference Paper",
-    title: "Making Sense of Algorithmic Advice in High-Stakes Contexts",
-    authors: "Your Name, Collaborator F",
-    venue: "ACM CSCW",
-    note: "",
-    link: "#",
+    type: "Refereed Journal Article",
+    title: "K-Pop and Education Migration to Korea in the Digitalised COVID Era",
+    authors: "Park, S., Schutte, S., & Park, S.",
+    venue: "Social Sciences, 14(6), 390",
+    note: "Peer reviewed",
+    link: "https://doi.org/10.3390/socsci14060390",
   },
 ];
 
 export const presentations = [
   {
-    date: "May 2026",
-    title: "Building AI That Knows When to Step Back",
-    event: "Invited Colloquium, Your University",
-    kind: "Invited Talk",
+    date: "August 2023",
+    title:
+      "A Study on the Discrimination of ‘Rental’ Apartments Reproduced in TV Dramas: Focusing on TV Chosun’s Drama Uncle",
+    event:
+      "2023 Cultural Studies Camp, Korean Association for Body & Cultural Studies (KABS), Republic of Korea",
+    kind: "Conference Paper",
   },
   {
-    date: "April 2025",
-    title: "Trust Calibration in AI-Assisted Decisions",
-    event: "ACM CHI 2025, Yokohama, Japan",
-    kind: "Conference",
-  },
-  {
-    date: "October 2024",
-    title: "Digital Routines and Everyday Well-being",
-    event: "International Communication Association",
-    kind: "Conference",
+    date: "2022",
+    title: "K-Pop and Education Migration to Korea in the Digitalised COVID-19 Era",
+    event:
+      "Korean Association for the Study of Popular Music, Republic of Korea",
+    kind: "Conference Paper",
   },
 ];
 
 export const projects = [
   {
-    number: "01",
-    status: "Ongoing",
-    title: "The Humane AI Lab",
+    number: "A",
+    status: "Current",
+    title: "Platform Affordances, User Agency, and Mediated Experience",
     description:
-      "A multi-year research program exploring how AI systems can support judgment without eroding human agency.",
-    tags: ["Human–AI Interaction", "Mixed Methods", "2025–2028"],
+      "Building on my master’s research, this agenda examines how platform architectures structure participation, mobility, sensory engagement, and belonging. It asks how design produces differential conditions of inclusion, exclusion, and agency across emerging digital spaces.",
+    tags: ["Platform Affordances", "User Agency", "Mediated Space"],
   },
   {
-    number: "02",
-    status: "Ongoing",
-    title: "Everyday Digital Well-being",
+    number: "B",
+    status: "Current",
+    title: "Digital Financial Subject Formation in the South Korean Military",
     description:
-      "Longitudinal studies of the small digital habits that accumulate into meaningful changes in daily life.",
-    tags: ["Field Study", "Mobile Sensing", "2024–2027"],
+      "This project examines how personal smartphone access following the 2019 military policy reform exposed soldiers to financial platforms, investment cultures, and entrepreneurial aspirations—and how these ecosystems reshape economic subjectivity and everyday military culture.",
+    tags: ["Digital Finance", "Military Culture", "Economic Subjectivity"],
   },
   {
-    number: "03",
-    status: "Completed",
-    title: "Public Interest Technology Toolkit",
+    number: "C",
+    status: "Current",
+    title: "Platform Power and Public Discourse Following Data Breaches",
     description:
-      "Open research tools that help civic organizations assess the social impact of automated systems.",
-    tags: ["Open Source", "Civic Tech", "2022–2024"],
+      "This research investigates how large-scale personal data breaches in South Korea are politically mobilized through public discourse, becoming struggles over legitimacy, responsibility, and asymmetric power within digital society.",
+    tags: ["Data Breaches", "Public Discourse", "Platform Power"],
   },
 ];
 
 export const news = [
   {
-    date: "Jun 12, 2026",
-    title: "New paper accepted to the Journal of Human–Computer Interaction",
-    text: "Our work on designing human-centered AI systems will appear later this year.",
+    date: "2026",
+    title: "Joined the Center for Media Responsibility and Human Rights",
+    text:
+      "Contributing to research and policy work on digital rights, platform accountability, and user protection in South Korea.",
   },
   {
-    date: "May 03, 2026",
-    title: "Invited talk on AI and human agency",
-    text: "I shared early findings from the Humane AI Lab at the departmental colloquium.",
+    date: "2026",
+    title: "Joined the International Communication Association",
+    text:
+      "Became a student member of the International Communication Association.",
   },
   {
-    date: "Feb 18, 2026",
-    title: "Research grant awarded",
-    text: "Our interdisciplinary team received funding for a three-year study of digital well-being.",
+    date: "2025",
+    title: "Article published in Social Sciences",
+    text:
+      "Our peer-reviewed study on K-Pop and education migration in the digitalised COVID era was published in Social Sciences.",
   },
 ];
+
+export const memberships = [
+  {
+    period: "2026 — Present",
+    title: "Student Member",
+    place: "International Communication Association (ICA)",
+  },
+  {
+    period: "Current",
+    title: "Member",
+    place: "Shinchon Center for Cultural-Politics Research",
+  },
+];
+
+export const methods = [
+  {
+    category: "Qualitative Methods",
+    items: ["In-depth Interview", "Thematic Analysis", "Visual Ethnography"],
+  },
+  {
+    category: "Research Design",
+    items: ["Qualitative Study Design", "Theoretical Framework Development"],
+  },
+  {
+    category: "Digital Media",
+    items: ["Adobe Premiere Pro", "Photoshop", "Illustrator"],
+  },
+];
+
+export const languages = [
+  { language: "Korean", level: "Native" },
+  { language: "English", level: "Advanced · IELTS 7.0" },
+  { language: "Spanish", level: "Beginner" },
+];
+
+export const thesis = {
+  title:
+    "Sense of Place in Digital Travel: User Experience in Online Guided Tours and Metaverse Travel",
+  method: "In-depth interview study · N=12",
+  summary:
+    "The study shows that platform structures—including medium, surrogate agents, digital locals, and co-participants—determine how actively users experience mediated spaces. Users construct a reflective sense of place by reorganizing sensory engagement, while platform-imposed constraints on sensory modalities, mobility, and temporality undermine ownership and belonging.",
+  contribution:
+    "Platform architectures do not neutrally deliver experience; they actively structure the conditions of participation and agency.",
+};
 
 export const blogPosts = [
   {
     source: "Tistory",
-    date: "Jun 16, 2026",
-    title: "연구 질문을 좋은 프로젝트로 발전시키는 방법",
-    excerpt: "막연한 관심사에서 검증 가능한 연구 질문으로 이동할 때 제가 사용하는 작은 체크리스트입니다.",
-    url: "https://example.tistory.com/1",
+    date: "Add date",
+    title: "Add your first Tistory post",
+    excerpt:
+      "Paste a Tistory post URL in the editor to feature writing and research notes here.",
+    url: "https://example.tistory.com",
     tone: "sage",
   },
   {
     source: "Instagram",
-    date: "Jun 08, 2026",
-    title: "Notes from the field",
-    excerpt: "A quiet afternoon of interviews, observation notes, and one unexpectedly good cup of coffee.",
+    date: "Add date",
+    title: "Add your first Instagram post",
+    excerpt:
+      "Paste an Instagram post URL in the editor to share field notes, conferences, and everyday academic life.",
     url: "https://www.instagram.com/",
     tone: "clay",
-  },
-  {
-    source: "Tistory",
-    date: "May 21, 2026",
-    title: "학회 발표 슬라이드를 다듬으며 배운 것들",
-    excerpt: "정보를 더 넣는 것보다 무엇을 남길지 결정하는 일이 발표를 훨씬 선명하게 만들었습니다.",
-    url: "https://example.tistory.com/2",
-    tone: "blue",
-  },
-  {
-    source: "Instagram",
-    date: "May 11, 2026",
-    title: "Conference week, in fragments",
-    excerpt: "Three conversations I am still thinking about after a busy week of talks and reunions.",
-    url: "https://www.instagram.com/",
-    tone: "gold",
   },
 ];

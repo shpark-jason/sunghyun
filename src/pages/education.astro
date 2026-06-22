@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
-import { education, experience } from "../data/site";
+import { education, experience, thesis } from "../data/site";
 ---
 <BaseLayout title="Education & Experience">
   <PageIntro eyebrow="Curriculum vitae" title="Education & Experience" text="The institutions, roles, and collaborations that have shaped my research." />
@@ -26,6 +26,16 @@ import { education, experience } from "../data/site";
             <div><h3>{item.title}</h3><p class="place">{item.place}</p><p>{item.detail}</p></div>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+  <section class="thesis-feature">
+    <div class="shell thesis-grid">
+      <div><p class="eyebrow">Master’s thesis</p><p class="thesis-method">{thesis.method}</p></div>
+      <div>
+        <h2>{thesis.title}</h2>
+        <p>{thesis.summary}</p>
+        <blockquote>{thesis.contribution}</blockquote>
       </div>
     </div>
   </section>

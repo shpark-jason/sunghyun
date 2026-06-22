@@ -190,6 +190,41 @@ code { background: var(--paper-deep); padding: 2px 5px; }
 .contact-details span { color: var(--muted); font-size: 11px; }
 .contact-details p { margin: 0; font-size: 13px; }
 .contact-links { display: flex; flex-direction: column; gap: 6px; }
+.profile-matrix {
+  padding: 0 0 110px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+.profile-row {
+  min-height: 72px;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+  padding: 15px 0;
+  border-top: 1px solid var(--ink);
+}
+.profile-row span { color: var(--muted); font-size: 10px; text-transform: uppercase; }
+.profile-row strong { font-size: 13px; font-weight: 500; }
+.thesis-feature { padding: 90px 0 110px; background: var(--ink); color: var(--paper); }
+.thesis-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; }
+.thesis-feature .eyebrow { color: #d8ff00; }
+.thesis-method { max-width: 180px; color: #aaa; font-size: 12px; text-transform: uppercase; }
+.thesis-feature h2 {
+  max-width: 900px;
+  font: 500 clamp(38px, 5vw, 74px)/.95 Arial, sans-serif;
+  letter-spacing: -.06em;
+  text-transform: uppercase;
+}
+.thesis-feature p { max-width: 780px; color: #bbb; font-size: 14px; }
+.thesis-feature blockquote {
+  max-width: 780px;
+  margin: 45px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid #666;
+  font-size: 18px;
+  line-height: 1.35;
+}
 
 @media (max-width: 1050px) {
   .site-header { height: 72px; }
@@ -219,6 +254,7 @@ code { background: var(--paper-deep); padding: 2px 5px; }
   .section-heading { align-items: start; gap: 25px; }
   .arrow-link { white-space: nowrap; }
   .news-grid, .cv-grid, .split-section, .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+  .profile-matrix, .thesis-grid { grid-template-columns: 1fr; gap: 45px; }
   .split-section, .cv-grid, .contact-grid { padding: 70px 0 90px; }
   .project-list { grid-template-columns: 1fr; }
   .project-card { min-height: 330px; }
@@ -246,6 +282,7 @@ code { background: var(--paper-deep); padding: 2px 5px; }
   .filter-row span { white-space: nowrap; }
   .timeline article { grid-template-columns: 1fr; gap: 6px; }
   .contact-details > div { grid-template-columns: 1fr; gap: 8px; }
+  .profile-row { grid-template-columns: 1fr; gap: 6px; }
 }
 
 /* Editorial redesign — inspired by Thomas Williams' minimal portfolio language */
