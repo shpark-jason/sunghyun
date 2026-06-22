@@ -308,7 +308,7 @@ h3 {
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
-  filter: grayscale(100%) contrast(1.08);
+  filter: none;
 }
 
 .quick-facts {
