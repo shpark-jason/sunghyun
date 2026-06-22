@@ -41,7 +41,14 @@ const nav = [
   <body>
     <header class="site-header">
       <a class="brand" href={url("/")} aria-label={`${site.name} home`}>
-        <span class="brand-mark">{site.shortName}</span>
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 42 42" role="img">
+            <rect class="logo-frame" x="1" y="1" width="40" height="40"></rect>
+            <path class="logo-y" d="M10 9 18 19 26 9M18 19v14"></path>
+            <path class="logo-n" d="M24 33V17l10 16V9"></path>
+            <circle class="logo-dot" cx="34" cy="9" r="2.2"></circle>
+          </svg>
+        </span>
         <span class="brand-name">{site.name}</span>
       </a>
       <button class="menu-button" aria-label="Open menu" aria-expanded="false">
