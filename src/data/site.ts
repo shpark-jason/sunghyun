@@ -22,7 +22,6 @@ export const site = {
     orcid: "https://orcid.org/",
     github: "https://github.com/shpark-jason",
     tistory: "https://sh-life.tistory.com/",
-    instagram: "https://www.instagram.com/proj.no.0/",
   },
 };
 
@@ -205,14 +204,4 @@ export const thesis = {
     "Platform architectures do not neutrally deliver experience; they actively structure the conditions of participation and agency.",
 };
 
-export const blogPosts = [
-  {
-    source: "Instagram",
-    date: "Add date",
-    title: "Add your first Instagram post",
-    excerpt:
-      "Paste an Instagram post URL in the editor to share field notes, conferences, and everyday academic life.",
-    url: "https://www.instagram.com/proj.no.0/",
-    tone: "clay",
-  },
-];
+export const blogPosts = [];

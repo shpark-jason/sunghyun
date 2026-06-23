@@ -4,21 +4,20 @@ import PageIntro from "../components/PageIntro.astro";
 import { blogPosts, site } from "../data/site";
 import tistoryPosts from "../data/tistory-posts.json";
 
-const instagramPosts = blogPosts.filter((post) => post.source === "Instagram");
-const posts = [
-  ...tistoryPosts.map((post, index) => ({
-    ...post,
-    tone: ["sage", "blue", "gold", "clay"][index % 4],
-  })),
-  ...instagramPosts.map((post) => ({ ...post, thumbnail: "" })),
-];
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const posts = tistoryPosts.map((post, index) => ({
+  ...post,
+  thumbnail: post.thumbnail?.startsWith("/")
+    ? `${base}${post.thumbnail}`
+    : post.thumbnail,
+  tone: ["sage", "blue", "gold", "clay"][index % 4],
+}));
 ---
 <BaseLayout title="Blog">
   <PageIntro eyebrow="Field notes" title="Blog & Instagram" text="Informal notes on research, teaching, conferences, and the texture of everyday academic life." />
   <section class="shell section">
     <div class="blog-source-links">
       <a href={site.links.tistory}>Visit Tistory <span>↗</span></a>
-      <a href={site.links.instagram}>Follow on Instagram <span>↗</span></a>
     </div>
     <div class="blog-grid">
       {posts.map((post) => (
@@ -26,7 +25,7 @@ const posts = [
           <div class:list={["blog-art", post.tone]}>
             {post.thumbnail && <img src={post.thumbnail} alt="" loading="lazy" />}
             <span class="source-pill">{post.source}</span>
-            <span class="art-symbol">{post.source === "Instagram" ? "◎" : "T"}</span>
+            <span class="art-symbol">T</span>
           </div>
           <div class="blog-copy">
             <time>{post.date}</time>
@@ -40,6 +39,6 @@ const posts = [
     {tistoryPosts.length === 0 && (
       <p class="blog-note">Tistory 글을 아직 불러오지 못했습니다. <code>npm.cmd run sync:tistory</code>를 실행한 뒤 새로고침해 주세요.</p>
     )}
-    <p class="blog-note">Tistory 최신 글 10개는 RSS를 통해 자동 갱신됩니다. Instagram 게시물은 Meta API 연결 전까지 관리자 페이지에서 추가할 수 있습니다.</p>
+    <p class="blog-note">Tistory 최신 글 10개와 대표 이미지는 RSS를 통해 자동 갱신됩니다.</p>
   </section>
 </BaseLayout>
