@@ -21,9 +21,9 @@ const thesisLink =
               <p class="place">{item.place}</p>
               <p>{item.detail}</p>
               {item.title.startsWith("M.A.") && (
-                <a class="education-link" href={thesisLink} target="_blank" rel="noreferrer">
-                  View master’s thesis on RISS ↗
-                </a>
+                <button class="education-link" type="button" data-open-thesis>
+                  View master’s thesis →
+                </button>
               )}
             </div>
           </article>
@@ -42,15 +42,38 @@ const thesisLink =
       </div>
     </div>
   </section>
-  <section class="thesis-feature">
-    <div class="shell thesis-grid">
-      <div><p class="eyebrow">Master’s thesis</p><p class="thesis-method">{thesis.method}</p></div>
-      <div>
-        <h2><a href={thesisLink} target="_blank" rel="noreferrer">{thesis.title}</a></h2>
+
+  <dialog class="thesis-dialog" data-thesis-dialog>
+    <div class="thesis-dialog-head">
+      <p class="eyebrow">Master’s thesis</p>
+      <button type="button" class="dialog-close" data-close-thesis aria-label="Close thesis details">×</button>
+    </div>
+    <div class="thesis-dialog-body">
+      <aside>
+        <span>Study design</span>
+        <strong>{thesis.method}</strong>
+      </aside>
+      <article>
+        <h2>{thesis.title}</h2>
         <p>{thesis.summary}</p>
         <blockquote>{thesis.contribution}</blockquote>
-        <a class="thesis-link" href={thesisLink} target="_blank" rel="noreferrer">View thesis on RISS ↗</a>
-      </div>
+        <a class="button primary" href={thesisLink} target="_blank" rel="noreferrer">
+          Read the full thesis on RISS <span>↗</span>
+        </a>
+      </article>
     </div>
-  </section>
+  </dialog>
+
+  <script>
+    const dialog = document.querySelector("[data-thesis-dialog]");
+    document.querySelector("[data-open-thesis]")?.addEventListener("click", () => {
+      dialog?.showModal();
+    });
+    document.querySelector("[data-close-thesis]")?.addEventListener("click", () => {
+      dialog?.close();
+    });
+    dialog?.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  </script>
 </BaseLayout>
