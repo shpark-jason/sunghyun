@@ -622,6 +622,25 @@ body {
 .tag-list span { background: transparent; border: 1px solid var(--ink); }
 
 .blog-source-links { text-transform: uppercase; font-size: 10px; }
+.language-switch {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin: 0 0 24px;
+}
+.language-switch button {
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font: 500 10px/1 var(--sans);
+}
+.language-switch button.active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: white;
+}
+[data-copy][hidden] { display: none; }
 .blog-grid { gap: 0; border-left: 1px solid var(--ink); border-top: 1px solid var(--ink); }
 .blog-card {
   border: 0;

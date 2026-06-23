@@ -19,6 +19,10 @@ const posts = tistoryPosts.map((post, index) => ({
     <div class="blog-source-links">
       <a href={site.links.tistory}>Visit Tistory <span>↗</span></a>
     </div>
+    <div class="language-switch" data-language-switch>
+      <button type="button" class="active" data-language="ko">한국어</button>
+      <button type="button" data-language="en">English</button>
+    </div>
     <div class="blog-grid">
       {posts.map((post) => (
         <a class="blog-card" href={post.url} target="_blank" rel="noreferrer">
@@ -29,8 +33,14 @@ const posts = tistoryPosts.map((post, index) => ({
           </div>
           <div class="blog-copy">
             <time>{post.date}</time>
-            <h2>{post.title}</h2>
-            <p>{post.excerpt}</p>
+            <div data-copy="ko">
+              <h2>{post.title}</h2>
+              <p>{post.excerpt}</p>
+            </div>
+            <div data-copy="en" hidden>
+              <h2>{post.titleEn || post.title}</h2>
+              <p>{post.excerptEn || post.excerpt}</p>
+            </div>
             <span class="read-more">Read original <span>↗</span></span>
           </div>
         </a>
@@ -41,4 +51,17 @@ const posts = tistoryPosts.map((post, index) => ({
     )}
     <p class="blog-note">Tistory 최신 글 10개와 대표 이미지는 RSS를 통해 자동 갱신됩니다.</p>
   </section>
+  <script>
+    document.querySelector("[data-language-switch]")?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-language]");
+      if (!button) return;
+      const language = button.dataset.language;
+      document.querySelectorAll("[data-language]").forEach((item) =>
+        item.classList.toggle("active", item === button)
+      );
+      document.querySelectorAll("[data-copy]").forEach((copy) => {
+        copy.hidden = copy.dataset.copy !== language;
+      });
+    });
+  </script>
 </BaseLayout>

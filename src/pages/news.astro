@@ -17,6 +17,12 @@ const imageUrl = (path: string) =>
 <BaseLayout title="News">
   <PageIntro eyebrow="News" title="Notes from the lab" text="Recent publications, talks, collaborations, and other small milestones." />
   <section class="shell section news-list">
+    {articles.length > 0 && (
+      <div class="language-switch" data-language-switch>
+        <button type="button" class="active" data-language="ko">한국어</button>
+        <button type="button" data-language="en">English</button>
+      </div>
+    )}
     {articles.length === 0 && (
       <div class="empty-state">
         <p>News and media coverage will be added here.</p>
@@ -30,17 +36,30 @@ const imageUrl = (path: string) =>
         </div>
         {item.image && <img src={imageUrl(item.image)} alt="" loading="lazy" />}
         <div>
-          <h2>{item.title}</h2>
-          <p>{item.text}</p>
-          {(item.titleEn || item.textEn) && (
-            <div class="news-translation">
-              {item.titleEn && <strong>{item.titleEn}</strong>}
-              {item.textEn && <p>{item.textEn}</p>}
-            </div>
-          )}
+          <div data-copy="ko">
+            <h2>{item.title}</h2>
+            <p>{item.text}</p>
+          </div>
+          <div data-copy="en" hidden>
+            <h2>{item.titleEn || item.title}</h2>
+            <p>{item.textEn || item.text}</p>
+          </div>
           {item.url && <a class="news-original" href={item.url} target="_blank" rel="noreferrer">Read original ↗</a>}
         </div>
       </article>
     ))}
   </section>
+  <script>
+    document.querySelector("[data-language-switch]")?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-language]");
+      if (!button) return;
+      const language = button.dataset.language;
+      document.querySelectorAll("[data-language]").forEach((item) =>
+        item.classList.toggle("active", item === button)
+      );
+      document.querySelectorAll("[data-copy]").forEach((copy) => {
+        copy.hidden = copy.dataset.copy !== language;
+      });
+    });
+  </script>
 </BaseLayout>

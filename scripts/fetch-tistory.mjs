@@ -6,6 +6,7 @@ const FEED_URL = "https://sh-life.tistory.com/rss";
 const OUTPUT_FILE = path.resolve("src/data/tistory-posts.json");
 const IMAGE_DIR = path.resolve("public/images/tistory");
 const POST_LIMIT = 10;
+const DEEPL_API_KEY = process.env.DEEPL_API_KEY || "";
 
 function decodeXml(value = "") {
   return value
@@ -128,6 +129,40 @@ async function cacheThumbnail(imageUrl, postUrl) {
   }
 }
 
+function containsKorean(value = "") {
+  return /[\u3131-\u318e\uac00-\ud7a3]/.test(value);
+}
+
+async function translateToEnglish(title, excerpt) {
+  if (!DEEPL_API_KEY || (!containsKorean(title) && !containsKorean(excerpt))) {
+    return { titleEn: "", excerptEn: "" };
+  }
+  try {
+    const response = await fetch("https://api-free.deepl.com/v2/translate", {
+      method: "POST",
+      headers: {
+        Authorization: `DeepL-Auth-Key ${DEEPL_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text: [title, excerpt],
+        source_lang: "KO",
+        target_lang: "EN",
+        context: excerpt,
+      }),
+    });
+    if (!response.ok) throw new Error(`DeepL HTTP ${response.status}`);
+    const result = await response.json();
+    return {
+      titleEn: result.translations?.[0]?.text || "",
+      excerptEn: result.translations?.[1]?.text || "",
+    };
+  } catch (error) {
+    console.warn(`Tistory translation skipped: ${error.message}`);
+    return { titleEn: "", excerptEn: "" };
+  }
+}
+
 function formatDate(value) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
@@ -180,8 +215,10 @@ try {
     parsedItems.map(async (post) => {
       const remoteThumbnail =
         post.thumbnail || (await fetchPageThumbnail(post.url));
+      const translation = await translateToEnglish(post.title, post.excerpt);
       return {
         ...post,
+        ...translation,
         thumbnail:
           (await cacheThumbnail(remoteThumbnail, post.url)) || remoteThumbnail,
       };

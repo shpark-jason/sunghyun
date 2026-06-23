@@ -86,14 +86,8 @@ const imageUrl = (path: string) =>
               <time>{item.date}</time>
               {item.publisher && <span>{item.publisher}</span>}
             </div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-              {(item.titleEn || item.textEn) && (
-                <div class="news-translation">
-                  {item.titleEn && <strong>{item.titleEn}</strong>}
-                  {item.textEn && <p>{item.textEn}</p>}
-                </div>
-              )}
+              <h3>{item.titleEn || item.title}</h3>
+              <p>{item.textEn || item.text}</p>
               {item.url && <a href={item.url} target="_blank" rel="noreferrer">Read original ↗</a>}
           </div>
         </article>
