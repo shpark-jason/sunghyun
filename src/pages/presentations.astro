@@ -10,7 +10,23 @@ import { presentations } from "../data/site";
       {presentations.map((item, index) => (
         <article>
           <span class="talk-number">0{index + 1}</span>
-          <div><span class="meta">{item.kind}</span><h2>{item.title}</h2><p>{item.event}</p></div>
+          <div>
+            <span class="meta">{item.kind}</span>
+            <h2>
+              {item.link ? (
+                <a href={item.link} target="_blank" rel="noreferrer">{item.title}</a>
+              ) : item.title}
+            </h2>
+            <p>{item.event.replace(
+              "Korean Association for Body & Cultural Studies",
+              "Korean Association for Broadcasting & Telecommunication Studies",
+            )}</p>
+            {item.link && (
+              <a class="talk-link" href={item.link} target="_blank" rel="noreferrer">
+                View presentation ↗
+              </a>
+            )}
+          </div>
           <time>{item.date}</time>
         </article>
       ))}

@@ -88,13 +88,15 @@ export const presentations = [
     "date": "August 2023",
     "title": "A Study on the Discrimination of ‘Rental’ Apartments Reproduced in TV Dramas: Focusing on TV Chosun’s Drama Uncle",
     "event": "2023 Cultural Studies Camp, Korean Association for Body & Cultural Studies (KABS), Republic of Korea",
-    "kind": "Conference Paper"
+    "kind": "Conference Paper",
+    "link": "https://kabs.or.kr/board/seminar/article/16489"
   },
   {
     "date": "2022",
     "title": "K-Pop and Education Migration to Korea in the Digitalised COVID-19 Era",
     "event": "Korean Association for the Study of Popular Music, Republic of Korea",
-    "kind": "Conference Paper"
+    "kind": "Conference Paper",
+    "link": "https://www.kaspm.net/84/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=124663161&t=board"
   }
 ];
 

@@ -149,6 +149,12 @@ p, h1, h2, h3 { margin-top: 0; }
 .talk-number { font: italic 22px var(--serif); color: var(--accent); }
 .talk-list h2 { font: 400 30px/1.2 var(--serif); margin: 10px 0 6px; }
 .talk-list p, .talk-list time { color: var(--muted); font-size: 12px; }
+.talk-link {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--accent);
+  font-size: 11px;
+}
 .project-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .project-card { border: 1px solid var(--line); min-height: 390px; padding: 28px; display: flex; flex-direction: column; transition: transform .2s, background .2s; }
 .project-card:hover { transform: translateY(-5px); background: var(--white); }
