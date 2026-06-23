@@ -14,7 +14,7 @@ const posts = tistoryPosts.map((post, index) => ({
 }));
 ---
 <BaseLayout title="Blog">
-  <PageIntro eyebrow="Field notes" title="Blog & Instagram" text="Informal notes on research, teaching, conferences, and the texture of everyday academic life." />
+  <PageIntro eyebrow="Field notes" title="Blog" text="Informal notes on research, culture, media, and the texture of everyday life." />
   <section class="shell section">
     <div class="blog-source-links">
       <a href={site.links.tistory}>Visit Tistory <span>↗</span></a>
@@ -44,8 +44,14 @@ const posts = tistoryPosts.map((post, index) => ({
               <p>{post.excerpt}</p>
             </div>
             <div data-copy="en" hidden>
-              <h2>{post.titleEn || post.title}</h2>
-              <p>{post.excerptEn || post.excerpt}</p>
+              {post.titleEn || post.excerptEn ? (
+                <>
+                  <h2>{post.titleEn}</h2>
+                  <p>{post.excerptEn}</p>
+                </>
+              ) : (
+                <p class="translation-pending">English translation is being prepared. Please use the original post for now.</p>
+              )}
             </div>
             <span class="read-more">Read original <span>↗</span></span>
           </div>

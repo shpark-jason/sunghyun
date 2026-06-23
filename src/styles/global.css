@@ -663,6 +663,11 @@ body {
   color: white;
 }
 [data-copy][hidden] { display: none; }
+.translation-pending {
+  margin-top: 28px;
+  color: var(--muted);
+  font-style: italic;
+}
 .blog-grid { gap: 0; border-left: 1px solid var(--ink); border-top: 1px solid var(--ink); }
 .blog-card {
   border: 0;

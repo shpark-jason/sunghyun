@@ -138,20 +138,25 @@ async function translateToEnglish(title, excerpt) {
     return { titleEn: "", excerptEn: "" };
   }
   try {
-    const response = await fetch("https://api-free.deepl.com/v2/translate", {
+    const apiHost = DEEPL_API_KEY.trim().endsWith(":fx")
+      ? "https://api-free.deepl.com"
+      : "https://api.deepl.com";
+    const response = await fetch(`${apiHost}/v2/translate`, {
       method: "POST",
       headers: {
-        Authorization: `DeepL-Auth-Key ${DEEPL_API_KEY}`,
+        Authorization: `DeepL-Auth-Key ${DEEPL_API_KEY.trim()}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         text: [title, excerpt],
         source_lang: "KO",
         target_lang: "EN",
-        context: excerpt,
       }),
     });
-    if (!response.ok) throw new Error(`DeepL HTTP ${response.status}`);
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(`DeepL HTTP ${response.status}: ${detail.slice(0, 160)}`);
+    }
     const result = await response.json();
     return {
       titleEn: result.translations?.[0]?.text || "",
