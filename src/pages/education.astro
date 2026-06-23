@@ -16,7 +16,16 @@ const thesisLink =
         {education.map((item) => (
           <article>
             <time>{item.period}</time>
-            <div><h3>{item.title}</h3><p class="place">{item.place}</p><p>{item.detail}</p></div>
+            <div>
+              <h3>{item.title}</h3>
+              <p class="place">{item.place}</p>
+              <p>{item.detail}</p>
+              {item.title.startsWith("M.A.") && (
+                <a class="education-link" href={thesisLink} target="_blank" rel="noreferrer">
+                  View master’s thesis on RISS ↗
+                </a>
+              )}
+            </div>
           </article>
         ))}
       </div>

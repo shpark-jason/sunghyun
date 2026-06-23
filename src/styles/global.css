@@ -166,6 +166,14 @@ p, h1, h2, h3 { margin-top: 0; }
 .timeline h3 { font: 400 23px var(--serif); margin-bottom: 3px; }
 .timeline p { color: var(--muted); font-size: 13px; margin-bottom: 0; }
 .timeline .place { color: var(--ink); font-weight: 600; margin-bottom: 8px; }
+.education-link {
+  display: inline-block;
+  margin-top: 13px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid currentColor;
+  color: var(--accent);
+  font-size: 11px;
+}
 .filter-row { display: flex; gap: 10px; margin-bottom: 30px; }
 .filter-row span { border: 1px solid var(--line); border-radius: 30px; padding: 7px 14px; font-size: 11px; }
 .filter-row .active { background: var(--ink); color: white; border-color: var(--ink); }
