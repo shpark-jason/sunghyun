@@ -87,6 +87,33 @@ function findContentThumbnail(html = "") {
   return "";
 }
 
+function extractArticleBody(html = "") {
+  const markers = [
+    /<div[^>]+class=["'][^"']*\btt_article_useless_p_margin\b[^"']*["'][^>]*>/i,
+    /<div[^>]+class=["'][^"']*\bcontents_style\b[^"']*["'][^>]*>/i,
+    /<div[^>]+class=["'][^"']*\barticle_view\b[^"']*["'][^>]*>/i,
+    /<div[^>]+class=["'][^"']*\bentry-content\b[^"']*["'][^>]*>/i,
+    /<article\b[^>]*>/i,
+  ];
+  for (const marker of markers) {
+    const match = marker.exec(html);
+    if (!match) continue;
+    const start = match.index + match[0].length;
+    const endCandidates = [
+      html.indexOf("<!--", start),
+      html.indexOf('<div class="container_postbtn', start),
+      html.indexOf('<div class="postbtn', start),
+      html.indexOf("</article>", start),
+      html.indexOf("<footer", start),
+    ].filter((index) => index > start);
+    const end = endCandidates.length
+      ? Math.min(...endCandidates)
+      : Math.min(html.length, start + 250000);
+    return html.slice(start, end);
+  }
+  return "";
+}
+
 async function fetchPageThumbnail(postUrl) {
   if (!postUrl) return "";
   try {
@@ -98,19 +125,9 @@ async function fetchPageThumbnail(postUrl) {
     });
     if (!response.ok) return "";
     const html = await response.text();
-    const contentImage = findContentThumbnail(html);
+    const articleBody = extractArticleBody(html);
+    const contentImage = findContentThumbnail(articleBody);
     if (contentImage) return contentImage;
-    const patterns = [
-      /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i,
-      /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i,
-      /<meta[^>]+name=["']twitter:image(?::src)?["'][^>]+content=["']([^"']+)["']/i,
-      /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image(?::src)?["']/i,
-    ];
-    for (const pattern of patterns) {
-      const match = html.match(pattern);
-      const candidate = normalizeImageUrl(match?.[1] || "");
-      if (candidate && !isPlaceholderImage(candidate)) return candidate;
-    }
   } catch {
     // A missing thumbnail should never stop the feed update.
   }
@@ -240,7 +257,7 @@ try {
           plainText.length > 160
             ? `${plainText.slice(0, 157).trim()}…`
             : plainText,
-        thumbnail: normalizeImageUrl(findThumbnail(content)),
+        thumbnail: normalizeImageUrl(findContentThumbnail(content)),
       };
     })
     .filter((post) => post.title && post.url);
@@ -254,11 +271,30 @@ try {
       return {
         ...post,
         ...translation,
+        remoteThumbnail,
         thumbnail:
           (await cacheThumbnail(remoteThumbnail, post.url)) || remoteThumbnail,
       };
     }),
   );
+
+  const thumbnailCounts = new Map();
+  for (const item of items) {
+    if (!item.remoteThumbnail) continue;
+    thumbnailCounts.set(
+      item.remoteThumbnail,
+      (thumbnailCounts.get(item.remoteThumbnail) || 0) + 1,
+    );
+  }
+  for (const item of items) {
+    if (
+      item.remoteThumbnail &&
+      thumbnailCounts.get(item.remoteThumbnail) >= 3
+    ) {
+      item.thumbnail = "";
+    }
+    delete item.remoteThumbnail;
+  }
 
   if (!items.length) throw new Error("No posts found in Tistory RSS");
 
