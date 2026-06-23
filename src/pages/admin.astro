@@ -5,6 +5,7 @@ import {
   experience,
   publications,
   presentations,
+  researchAgenda,
   projects,
   news,
   memberships,
@@ -20,6 +21,7 @@ const initialData = {
   experience,
   publications,
   presentations,
+  researchAgenda,
   projects,
   news,
   memberships,
@@ -178,6 +180,17 @@ const initialData = {
           ],
         },
         {
+          key: "researchAgenda",
+          title: "Research Agenda",
+          fields: [
+            ["number", "번호"],
+            ["status", "상태"],
+            ["title", "연구 의제"],
+            ["description", "설명", "textarea"],
+            ["tags", "태그 (쉼표로 구분)", "list"],
+          ],
+        },
+        {
           key: "projects",
           title: "Projects",
           fields: [
@@ -224,7 +237,7 @@ const initialData = {
         },
         {
           key: "blogPosts",
-          title: "Blog & Instagram",
+          title: "Instagram Posts",
           fields: [
             ["source", "출처"],
             ["date", "날짜"],
@@ -371,7 +384,7 @@ const initialData = {
       });
 
       function createSource() {
-        const order = ["site", "education", "experience", "publications", "presentations", "projects", "news", "memberships", "methods", "languages", "thesis", "blogPosts"];
+        const order = ["site", "education", "experience", "publications", "presentations", "researchAgenda", "projects", "news", "memberships", "methods", "languages", "thesis", "blogPosts"];
         return order.map((key) =>
           `export const ${key} = ${JSON.stringify(state[key], null, 2)};\n`
         ).join("\n");

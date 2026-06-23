@@ -27,6 +27,7 @@ function localPortfolioEditor() {
               "experience",
               "publications",
               "presentations",
+              "researchAgenda",
               "projects",
               "news",
               "memberships",

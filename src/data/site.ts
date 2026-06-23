@@ -18,11 +18,11 @@ export const site = {
     "Social Class & Cultural Capital",
   ],
   links: {
-    scholar: "https://scholar.google.com/",
+    scholar: "https://scholar.google.com/citations?user=vu1e36MAAAAJ&hl=en",
     orcid: "https://orcid.org/",
     github: "https://github.com/shpark-jason",
-    tistory: "https://example.tistory.com",
-    instagram: "https://www.instagram.com/",
+    tistory: "https://sh-life.tistory.com/",
+    instagram: "https://www.instagram.com/proj.no.0/",
   },
 };
 
@@ -111,7 +111,7 @@ export const presentations = [
   },
 ];
 
-export const projects = [
+export const researchAgenda = [
   {
     number: "A",
     status: "Current",
@@ -137,6 +137,8 @@ export const projects = [
     tags: ["Data Breaches", "Public Discourse", "Platform Power"],
   },
 ];
+
+export const projects = [];
 
 export const news = [
   {
@@ -205,21 +207,12 @@ export const thesis = {
 
 export const blogPosts = [
   {
-    source: "Tistory",
-    date: "Add date",
-    title: "Add your first Tistory post",
-    excerpt:
-      "Paste a Tistory post URL in the editor to feature writing and research notes here.",
-    url: "https://example.tistory.com",
-    tone: "sage",
-  },
-  {
     source: "Instagram",
     date: "Add date",
     title: "Add your first Instagram post",
     excerpt:
       "Paste an Instagram post URL in the editor to share field notes, conferences, and everyday academic life.",
-    url: "https://www.instagram.com/",
+    url: "https://www.instagram.com/proj.no.0/",
     tone: "clay",
   },
 ];

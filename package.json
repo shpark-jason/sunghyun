@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "sync:tistory": "node scripts/fetch-tistory.mjs",
+    "predev": "npm run sync:tistory",
     "dev": "astro dev",
+    "prebuild": "npm run sync:tistory",
     "build": "astro build",
     "preview": "astro preview"
   },

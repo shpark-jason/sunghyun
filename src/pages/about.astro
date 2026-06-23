@@ -1,13 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
-import { site, methods, languages, memberships } from "../data/site";
+import { site, methods, languages, memberships, researchAgenda } from "../data/site";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 <BaseLayout title="About">
   <PageIntro eyebrow="About" title="Platforms are never neutral." text={site.profile} />
   <section class="shell split-section">
     <div class="about-visual">
-      <span>{site.shortName}</span>
+      <img
+        src={`${base}/images/sunghyun-park.png`}
+        alt="Portrait of Sunghyun Park"
+        width="968"
+        height="1291"
+        loading="eager"
+      />
+      <div class="portrait-label">
+        <span>Sunghyun Park</span>
+        <span>Seoul, Republic of Korea</span>
+      </div>
     </div>
     <div class="prose">
       <p class="dropcap">My work begins with a question: how do digital infrastructures set the terms through which people participate, move, belong, and gain access?</p>
@@ -32,6 +43,26 @@ import { site, methods, languages, memberships } from "../data/site";
       {memberships.map((item) => (
         <div class="profile-row"><span>{item.period}</span><strong>{item.title}, {item.place}</strong></div>
       ))}
+    </div>
+  </section>
+  <section class="research-agenda-section">
+    <div class="shell">
+      <div class="agenda-heading">
+        <p class="eyebrow">Current research agenda</p>
+        <h2>Three connected lines of inquiry</h2>
+      </div>
+      <div class="agenda-list">
+        {researchAgenda.map((item) => (
+          <article>
+            <span class="agenda-number">{item.number}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <div class="tag-list">{item.tags.map((tag) => <span>{tag}</span>)}</div>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -7,24 +7,21 @@ const url = (path: string) => `${base}${path}`;
 <BaseLayout>
   <section class="hero shell">
     <div class="hero-copy">
-      <div class="hero-index">
-        <span>Independent researcher</span>
-        <span>Seoul, KR</span>
-        <span>2026</span>
-      </div>
-      <h1>Research for a more <em>human</em> technological future.</h1>
+      <p class="hero-role">{site.role}</p>
+      <h1>Studying how digital platforms shape <em>participation, inequality, and agency.</em></h1>
       <p class="hero-lede">{site.intro}</p>
       <div class="button-row">
         <a class="button primary" href={url("/publications")}>Explore my research <span>↗</span></a>
         <a class="button text" href={url("/contact")}>Get in touch <span>→</span></a>
       </div>
     </div>
-    <div class="hero-side" aria-label="Research profile">
-      <div class="hero-stamp">{site.shortName}</div>
-      <div class="hero-side-copy">
-        <span>Focus</span>
-        <p>Media Studies · Information Studies · Critical Platform Research</p>
-      </div>
+  </section>
+
+  <section class="welcome shell">
+    <p class="eyebrow">Hello, and welcome</p>
+    <div class="welcome-copy">
+      <p>{site.profile}</p>
+      <p>This website brings together my academic background, current research agenda, publications, conference activity, and public-facing work on media responsibility and digital rights.</p>
     </div>
   </section>
 
