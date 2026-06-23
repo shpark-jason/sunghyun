@@ -32,10 +32,10 @@ const posts = tistoryPosts.map((post, index) => ({
     <div class="blog-grid">
       {posts.map((post) => (
         <a class="blog-card" href={post.url} target="_blank" rel="noreferrer">
-          <div class:list={["blog-art", post.tone]}>
+          <div class:list={["blog-art", post.tone, { "without-image": !post.thumbnail }]}>
             {post.thumbnail && <img src={post.thumbnail} alt="" loading="lazy" />}
             <span class="source-pill">{post.source}</span>
-            <span class="art-symbol">T</span>
+            {!post.thumbnail && <span class="art-symbol">T</span>}
           </div>
           <div class="blog-copy">
             <time>{post.date}</time>

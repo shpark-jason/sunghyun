@@ -17,6 +17,7 @@ function decodeXml(value = "") {
     .replaceAll("&quot;", '"')
     .replaceAll("&#39;", "'")
     .replaceAll("&apos;", "'")
+    .replaceAll("&nbsp;", " ")
     .replaceAll("&amp;", "&");
 }
 
@@ -59,6 +60,33 @@ function normalizeImageUrl(value = "") {
   return url.replace(/^http:\/\//i, "https://");
 }
 
+function isPlaceholderImage(value = "") {
+  const url = value.toLowerCase();
+  return [
+    "tistory_admin/static/images",
+    "opengraph.png",
+    "no-image",
+    "no_image",
+    "noimage",
+    "default_image",
+    "default-image",
+    "profile_default",
+  ].some((token) => url.includes(token));
+}
+
+function findContentThumbnail(html = "") {
+  const imageTags = [...html.matchAll(/<img\b[^>]*>/gi)].map((match) => match[0]);
+  for (const tag of imageTags) {
+    const attributes = ["data-origin-url", "data-url", "data-src", "src"];
+    for (const attribute of attributes) {
+      const match = tag.match(new RegExp(`${attribute}=["']([^"']+)["']`, "i"));
+      const candidate = normalizeImageUrl(match?.[1] || "");
+      if (candidate && !isPlaceholderImage(candidate)) return candidate;
+    }
+  }
+  return "";
+}
+
 async function fetchPageThumbnail(postUrl) {
   if (!postUrl) return "";
   try {
@@ -70,6 +98,8 @@ async function fetchPageThumbnail(postUrl) {
     });
     if (!response.ok) return "";
     const html = await response.text();
+    const contentImage = findContentThumbnail(html);
+    if (contentImage) return contentImage;
     const patterns = [
       /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i,
       /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i,
@@ -78,7 +108,8 @@ async function fetchPageThumbnail(postUrl) {
     ];
     for (const pattern of patterns) {
       const match = html.match(pattern);
-      if (match?.[1]) return normalizeImageUrl(match[1]);
+      const candidate = normalizeImageUrl(match?.[1] || "");
+      if (candidate && !isPlaceholderImage(candidate)) return candidate;
     }
   } catch {
     // A missing thumbnail should never stop the feed update.
@@ -209,9 +240,7 @@ try {
           plainText.length > 160
             ? `${plainText.slice(0, 157).trim()}…`
             : plainText,
-        thumbnail: normalizeImageUrl(
-          findThumbnail(item) || findThumbnail(content),
-        ),
+        thumbnail: normalizeImageUrl(findThumbnail(content)),
       };
     })
     .filter((post) => post.title && post.url);
@@ -219,7 +248,8 @@ try {
   const items = await Promise.all(
     parsedItems.map(async (post) => {
       const remoteThumbnail =
-        post.thumbnail || (await fetchPageThumbnail(post.url));
+        (!isPlaceholderImage(post.thumbnail) && post.thumbnail) ||
+        (await fetchPageThumbnail(post.url));
       const translation = await translateToEnglish(post.title, post.excerpt);
       return {
         ...post,

@@ -1400,6 +1400,15 @@ body {
 .blog-art.clay { background: #a85c48; }
 .blog-art.blue { background: #647a90; }
 .blog-art.gold { background: #a9854d; }
+.blog-art.without-image {
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+}
+.blog-art.without-image .art-symbol {
+  color: var(--ink);
+  opacity: .16;
+  font-size: 72px;
+}
 .source-pill { background: white; }
 .blog-copy h2 {
   font-family: var(--serif);
