@@ -2,34 +2,48 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
 import { presentations } from "../data/site";
+
+const presentationLink = (item) => {
+  if (item.link) return item.link;
+  if (item.title.includes("Rental")) {
+    return "https://kabs.or.kr/board/seminar/article/16489";
+  }
+  if (item.title.includes("K-Pop")) {
+    return "https://www.kaspm.net/84/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=124663161&t=board";
+  }
+  return "";
+};
 ---
 <BaseLayout title="Presentations">
   <PageIntro eyebrow="Conference activity" title="Presentations" text="Research presented across cultural studies, popular music, media, and communication communities." />
   <section class="shell section">
     <div class="talk-list">
-      {presentations.map((item, index) => (
-        <article>
+      {presentations.map((item, index) => {
+        const link = presentationLink(item);
+        return (
+          <article>
           <span class="talk-number">0{index + 1}</span>
           <div>
             <span class="meta">{item.kind}</span>
             <h2>
-              {item.link ? (
-                <a href={item.link} target="_blank" rel="noreferrer">{item.title}</a>
+              {link ? (
+                <a href={link} target="_blank" rel="noreferrer">{item.title}</a>
               ) : item.title}
             </h2>
             <p>{item.event.replace(
               "Korean Association for Body & Cultural Studies",
               "Korean Association for Broadcasting & Telecommunication Studies",
             )}</p>
-            {item.link && (
-              <a class="talk-link" href={item.link} target="_blank" rel="noreferrer">
+            {link && (
+              <a class="talk-link" href={link} target="_blank" rel="noreferrer">
                 View presentation ↗
               </a>
             )}
           </div>
           <time>{item.date}</time>
-        </article>
-      ))}
+          </article>
+        );
+      })}
     </div>
   </section>
 </BaseLayout>

@@ -26,7 +26,7 @@ export const site = {
 export const education = [
   {
     "period": "M.A.",
-    "title": "M.A. in Media and Cultural Studies",
+    "title": "M.A. in Media Cultural Studies",
     "place": "Yonsei University, Graduate School of Communication & Arts",
     "detail": "GPA 4.07/4.3 · Thesis: Sense of Place in Digital Travel: User Experience in Online Guided Tours and Metaverse Travel"
   },
@@ -221,6 +221,7 @@ export const languages = [
 
 export const thesis = {
   "title": "Sense of Place in Digital Travel: User Experience in Online Guided Tours and Metaverse Travel",
+  "link": "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=be54d9b8bc7cdb09&control_no=dca174160e77311bffe0bdc3ef48d419&keyword=%EB%94%94%EC%A7%80%ED%84%B8%20%EC%97%AC%ED%96%89",
   "method": "In-depth interview study · N=12",
   "summary": "The study shows that platform structures—including medium, surrogate agents, digital locals, and co-participants—determine how actively users experience mediated spaces. Users construct a reflective sense of place by reorganizing sensory engagement, while platform-imposed constraints on sensory modalities, mobility, and temporality undermine ownership and belonging.",
   "contribution": "Platform architectures do not neutrally deliver experience; they actively structure the conditions of participation and agency."

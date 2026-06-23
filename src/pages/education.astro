@@ -33,9 +33,10 @@ import { education, experience, thesis } from "../data/site";
     <div class="shell thesis-grid">
       <div><p class="eyebrow">Master’s thesis</p><p class="thesis-method">{thesis.method}</p></div>
       <div>
-        <h2>{thesis.title}</h2>
+        <h2><a href={thesis.link} target="_blank" rel="noreferrer">{thesis.title}</a></h2>
         <p>{thesis.summary}</p>
         <blockquote>{thesis.contribution}</blockquote>
+        <a class="thesis-link" href={thesis.link} target="_blank" rel="noreferrer">View thesis on RISS ↗</a>
       </div>
     </div>
   </section>
