@@ -104,3 +104,23 @@ npm.cmd run sync:tistory
 ```
 
 GitHub Pages에서는 GitHub Actions가 매일 오전 6시 17분경(한국 시간)에 RSS를 다시 읽고 사이트를 재배포합니다. 저장소의 Actions 화면에서 배포 워크플로를 수동 실행해 즉시 갱신할 수도 있습니다.
+
+## 언론보도 자동 카드
+
+관리자 페이지의 News 항목에 기사 URL을 입력하면 빌드할 때 기사 제목, 언론사, 대표 이미지와 공식 요약문을 수집합니다. 공식 요약문이 없는 경우에만 기사 첫 문단 일부를 사용합니다.
+
+로컬에서 기사 정보를 즉시 갱신:
+
+```powershell
+npm.cmd run sync:news
+```
+
+### 영문 자동 번역
+
+DeepL API Free 키를 `DEEPL_API_KEY`로 등록하면 한국어 기사 제목과 요약 아래에 영문 번역이 자동 표시됩니다.
+
+- 로컬 PowerShell: `$env:DEEPL_API_KEY="발급받은 키"`
+- GitHub: 저장소 **Settings → Secrets and variables → Actions → New repository secret**
+- Secret 이름: `DEEPL_API_KEY`
+
+API 키가 없다면 관리자 페이지의 영문 제목·영문 요약 필드에 직접 입력할 수 있습니다.

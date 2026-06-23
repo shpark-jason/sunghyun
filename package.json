@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "sync:tistory": "node scripts/fetch-tistory.mjs",
-    "predev": "npm run sync:tistory",
+    "sync:news": "node scripts/fetch-news.mjs",
+    "sync:content": "npm run sync:tistory && npm run sync:news",
+    "predev": "npm run sync:content",
     "dev": "astro dev",
-    "prebuild": "npm run sync:tistory",
+    "prebuild": "npm run sync:content",
     "build": "astro build",
     "preview": "astro preview"
   },

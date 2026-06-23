@@ -2,14 +2,44 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
 import { news } from "../data/site";
+import syncedNews from "../data/news-articles.json";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const sourceNews = news.filter((item) =>
+  /^https?:\/\//i.test(item.url || "") &&
+  !/^https?:\/\/(dx\.)?doi\.org\//i.test(item.url || "")
+);
+const currentUrls = new Set(sourceNews.map((item) => item.url));
+const currentSyncedNews = syncedNews.filter((item) => currentUrls.has(item.url));
+const articles = currentSyncedNews.length ? currentSyncedNews : sourceNews;
+const imageUrl = (path: string) =>
+  path?.startsWith("/") ? `${base}${path}` : path;
 ---
 <BaseLayout title="News">
   <PageIntro eyebrow="News" title="Notes from the lab" text="Recent publications, talks, collaborations, and other small milestones." />
   <section class="shell section news-list">
-    {news.map((item) => (
-      <article>
-        <time>{item.date}</time>
-        <div><h2>{item.title}</h2><p>{item.text}</p></div>
+    {articles.length === 0 && (
+      <div class="empty-state">
+        <p>News and media coverage will be added here.</p>
+      </div>
+    )}
+    {articles.map((item) => (
+      <article class:list={{ "has-news-image": item.image }}>
+        <div class="news-date">
+          <time>{item.date}</time>
+          {item.publisher && <span>{item.publisher}</span>}
+        </div>
+        {item.image && <img src={imageUrl(item.image)} alt="" loading="lazy" />}
+        <div>
+          <h2>{item.title}</h2>
+          <p>{item.text}</p>
+          {(item.titleEn || item.textEn) && (
+            <div class="news-translation">
+              {item.titleEn && <strong>{item.titleEn}</strong>}
+              {item.textEn && <p>{item.textEn}</p>}
+            </div>
+          )}
+          {item.url && <a class="news-original" href={item.url} target="_blank" rel="noreferrer">Read original ↗</a>}
+        </div>
       </article>
     ))}
   </section>
