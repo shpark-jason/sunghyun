@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site, publications, news } from "../data/site";
 import syncedNews from "../data/news-articles.json";
+import tistoryPosts from "../data/tistory-posts.json";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const url = (path: string) => `${base}${path}`;
 const sourceNews = news.filter((item) =>
@@ -13,6 +14,36 @@ const currentSyncedNews = syncedNews.filter((item) => currentUrls.has(item.url))
 const latestNews = currentSyncedNews.length ? currentSyncedNews : sourceNews;
 const imageUrl = (path: string) =>
   path?.startsWith("/") ? `${base}${path}` : path;
+const newsUpdates = latestNews.map((item) => ({
+    ...item,
+    source: "News",
+    thumbnail: "",
+    excerptEn: item.textEn || "",
+    target: item.url,
+  }));
+const blogUpdates = tistoryPosts.map((item) => ({
+    ...item,
+    source: "Blog",
+    image: "",
+    publisher: "",
+    text: item.excerpt,
+    textEn: item.excerptEn || "",
+    target: item.url,
+  }));
+const byNewest = (a, b) => {
+    const bDate = Date.parse(b.date || "") || 0;
+    const aDate = Date.parse(a.date || "") || 0;
+    return bDate - aDate;
+  };
+const pinnedNews = [...newsUpdates].sort(byNewest)[0];
+const remainingUpdates = [
+  ...newsUpdates.filter((item) => item !== pinnedNews),
+  ...blogUpdates,
+].sort(byNewest);
+const updates = [
+  ...(pinnedNews ? [pinnedNews] : []),
+  ...remainingUpdates,
+].slice(0, 9);
 ---
 <BaseLayout>
   <section class="hero shell">
@@ -69,26 +100,49 @@ const imageUrl = (path: string) =>
     </div>
   </section>
 
-  {latestNews.length > 0 && <section class="section shell home-news">
+  {updates.length > 0 && <section class="section shell home-news">
     <div class="section-heading">
       <div>
         <p class="eyebrow">Updates</p>
-        <h2>Latest news</h2>
+        <h2>Latest updates</h2>
       </div>
-      <a class="arrow-link" href={url("/news")}>All news <span>→</span></a>
+      <a class="arrow-link" href={url("/blog")}>View blog <span>→</span></a>
+    </div>
+    <div class="translation-tools home-translation-tools">
+      <div>
+        <span class="translation-label">Language</span>
+        <p>English translations are automatically generated with DeepL.</p>
+      </div>
+      <div class="language-switch" data-home-language-switch aria-label="Update language">
+        <button type="button" class="active" data-home-language="ko" aria-pressed="true">한국어</button>
+        <button type="button" data-home-language="en" aria-pressed="false">English</button>
+      </div>
     </div>
     <div class="news-grid">
-      {latestNews.slice(0, 3).map((item) => (
+      {updates.map((item) => (
         <article class:list={["news-card", { "has-image": item.image }]}>
-          {item.image && <img src={imageUrl(item.image)} alt="" loading="lazy" />}
+          {item.thumbnail && <img src={imageUrl(item.thumbnail)} alt="" loading="lazy" />}
+          {!item.thumbnail && item.image && <img src={imageUrl(item.image)} alt="" loading="lazy" />}
           <div class="news-card-copy">
             <div class="news-card-meta">
+              <span>{item.source}</span>
               <time>{item.date}</time>
-              {item.publisher && <span>{item.publisher}</span>}
             </div>
-              <h3>{item.titleEn || item.title}</h3>
-              <p>{item.textEn || item.text}</p>
-              {item.url && <a href={item.url} target="_blank" rel="noreferrer">Read original ↗</a>}
+            <div data-home-copy="ko">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+            <div data-home-copy="en" hidden>
+              {item.titleEn || item.textEn ? (
+                <>
+                  <h3>{item.titleEn || item.title}</h3>
+                  <p>{item.textEn || item.text}</p>
+                </>
+              ) : (
+                <p class="translation-pending">English translation is being prepared.</p>
+              )}
+            </div>
+            {item.target && <a href={item.target} target="_blank" rel="noreferrer">Read original ↗</a>}
           </div>
         </article>
       ))}
@@ -102,4 +156,19 @@ const imageUrl = (path: string) =>
       <a class="button light" href={url("/contact")}>Let’s talk <span>↗</span></a>
     </div>
   </section>
+  <script>
+    document.querySelector("[data-home-language-switch]")?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-home-language]");
+      if (!button) return;
+      const language = button.dataset.homeLanguage;
+      document.querySelectorAll("[data-home-language]").forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+      document.querySelectorAll("[data-home-copy]").forEach((copy) => {
+        copy.hidden = copy.dataset.homeCopy !== language;
+      });
+    });
+  </script>
 </BaseLayout>
