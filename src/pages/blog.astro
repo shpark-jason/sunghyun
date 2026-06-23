@@ -19,9 +19,15 @@ const posts = tistoryPosts.map((post, index) => ({
     <div class="blog-source-links">
       <a href={site.links.tistory}>Visit Tistory <span>↗</span></a>
     </div>
-    <div class="language-switch" data-language-switch>
-      <button type="button" class="active" data-language="ko">한국어</button>
-      <button type="button" data-language="en">English</button>
+    <div class="translation-tools">
+      <div>
+        <span class="translation-label">Language</span>
+        <p>English translations are automatically generated with DeepL.</p>
+      </div>
+      <div class="language-switch" data-language-switch aria-label="Post language">
+        <button type="button" class="active" data-language="ko" aria-pressed="true">한국어</button>
+        <button type="button" data-language="en" aria-pressed="false">English</button>
+      </div>
     </div>
     <div class="blog-grid">
       {posts.map((post) => (
@@ -57,7 +63,11 @@ const posts = tistoryPosts.map((post, index) => ({
       if (!button) return;
       const language = button.dataset.language;
       document.querySelectorAll("[data-language]").forEach((item) =>
-        item.classList.toggle("active", item === button)
+        {
+          const active = item === button;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-pressed", String(active));
+        }
       );
       document.querySelectorAll("[data-copy]").forEach((copy) => {
         copy.hidden = copy.dataset.copy !== language;
